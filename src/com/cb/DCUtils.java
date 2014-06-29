@@ -8,10 +8,15 @@ import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 
 public class DCUtils {
 	private String filePath;
@@ -69,6 +74,7 @@ public class DCUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(map.get("YHR110W"));
 		return map;
 	}
 	private HashSet<String> initData() {
@@ -87,21 +93,39 @@ public class DCUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		System.out.println(hashSet.contains("YHR110W"));
 		return hashSet;
 	}
 	private boolean checkDc(Map<String, Integer> map, HashSet<String> hashSet) {
-		PrintStream out = new PrintStream(fop);
-		Set<String> set = map.keySet();
-		for (String item:set) {
-			//System.out.println(item + "	" + map.get(item));
-		}
 		
-		for (String item : hashSet) {
-			System.out.println(item + ";");
-			if (map.get(item) != null) {
-				out.print(item + "	" + map.get(item) + "\n");
+		PrintStream out = new PrintStream(fop);
+		
+
+		List<Map.Entry<String, Integer>> infoIds =
+			    new ArrayList<Map.Entry<String, Integer>>(map.entrySet());
+		
+		//≈≈–Ú
+		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
+		    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      
+		        return (o2.getValue() - o1.getValue()); 
+		        //return (o1.getKey()).toString().compareTo(o2.getKey());
+		    }
+		});
+		//}); 
+		int i = 0;
+		for(Map.Entry<String,Integer> e : infoIds) {
+			System.out.println(e.getKey() + "::::" + e.getValue());
+			//System.out.println(item + ";");
+			if (hashSet.contains(e.getKey())) {
+				out.print(e.getKey() + "	" + e.getValue() + "	" +"1\n");
+			} else {
+				out.print(e.getKey() + "	" + e.getValue() + "	" +"0\n");
+				//System.out.println("0");
 			}
 		}
+		
+		
+		
 		try {
 			fop.close();
 			fip.close();

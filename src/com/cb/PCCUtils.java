@@ -55,12 +55,13 @@ public class PCCUtils {
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
-				String [] strs = buf.split("	");
+				/*String [] strs = buf.split("	");
 				//System.out.println(strs[0] + ";" + strs[1] + ";");
 				if (!hashSet.contains(strs[0]))
 					hashSet.add(strs[0]);
 				if (!hashSet.contains(strs[1]))
-					hashSet.add(strs[1].toString());
+					hashSet.add(strs[1].toString());*/
+				hashSet.add(buf);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -97,7 +98,7 @@ public class PCCUtils {
 		return map;
 	}
 	
-	public double pcc(List<Double> X, List<Double> Y) {
+	private double pcc(List<Double> X, List<Double> Y) {
 		double sumX = 0, sumY = 0, 
 			   sumXSq = 0, sumYSq = 0,
 			   pSum = 0;
@@ -126,8 +127,8 @@ public class PCCUtils {
 		PrintStream out = new PrintStream(fop);
 		Set<String> data = initItem();
 		Map<String, List<Double>> map = initData();
-		Object[] strs = data.toArray();
-		for (int i = 0; i < strs.length; i++) {
+		//Object[] strs = data.toArray();
+		/*for (int i = 0; i < strs.length; i++) {
 			for (int j = i + 1; j < strs.length; j++) {
 				if (map.get(strs[i].toString()) != null
 						&& map.get(strs[j].toString()) != null) {
@@ -136,7 +137,19 @@ public class PCCUtils {
 					//return;
 				}
 			}
+		}*/
+		
+		for (String item:data) {
+			String [] items = item.split("	");
+			if (map.get(items[0]) != null && map.get(items[1]) != null) {
+				double ret = pcc(map.get(items[0]), map.get(items[1]));
+				out.print(items[0] + "	" + items[0] + "	" + ret + "\n");
+			}
+			//return;
+			
+			
 		}
+		
 		try {
 			fop.close();
 			fip.close();
