@@ -33,26 +33,13 @@ public class DCUtils {
 		this.dataPath = dataPath;
 	}
 	public boolean init() {
-		File file = new File(filePath);
-		File outFile = new File(outFilePath);
-		if (file.exists() && file.isFile()
-				&& (!outFile.exists() || outFile.isFile())) {
-			try {
-				fip = new FileInputStream(file);
-				fop = new FileOutputStream(outFile);
-				return true;
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return false;
-			}
-		} else return false;
+		return true;
 	}
 	private Map<String, Integer> getDc() {
 		Map<String, Integer> map= new HashMap<String, Integer>();
 		
 		try {
-			FileReader ins = new FileReader(filePath);
+			FileReader ins = new FileReader("go_sc_net_filter.txt");
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -81,7 +68,7 @@ public class DCUtils {
 		HashSet<String> hashSet= new HashSet<String>();
 		
 		try {
-			FileReader ins = new FileReader(dataPath);
+			FileReader ins = new FileReader("Essential.txt");
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -98,13 +85,20 @@ public class DCUtils {
 	}
 	private boolean checkDc(Map<String, Integer> map, HashSet<String> hashSet) {
 		
+		File outFile = new File("go_SC_net_result.txt");
+		try {
+			fop = new FileOutputStream(outFile);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
 		PrintStream out = new PrintStream(fop);
 		
 
 		List<Map.Entry<String, Integer>> infoIds =
 			    new ArrayList<Map.Entry<String, Integer>>(map.entrySet());
 		
-		//ÅÅÐò
+		//ï¿½ï¿½ï¿½ï¿½
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
 		    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      
 		        return (o2.getValue() - o1.getValue()); 
@@ -128,7 +122,6 @@ public class DCUtils {
 		
 		try {
 			fop.close();
-			fip.close();
 			//dip.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -141,5 +134,7 @@ public class DCUtils {
 	public void calDc() {
 		checkDc(getDc(), initData());
 	}
+	
+	
 	
 }

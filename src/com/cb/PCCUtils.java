@@ -143,7 +143,7 @@ public class PCCUtils {
 			String [] items = item.split("	");
 			if (map.get(items[0]) != null && map.get(items[1]) != null) {
 				double ret = pcc(map.get(items[0]), map.get(items[1]));
-				out.print(items[0] + "	" + items[0] + "	" + ret + "\n");
+				out.print(items[0] + "	" + items[1] + "	" + ret + "\n");
 			}
 			//return;
 			
