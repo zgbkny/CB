@@ -4,43 +4,36 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.List;
 
 public class cb {
 
+	public static void calEcc() {
+		DCUtils dcUtils = new DCUtils();
+		dcUtils.calDc("DIP20101010.txt", "Essential.txt");
+		
+		ECCUtils eccUtils = new ECCUtils();
+		eccUtils.calEcc("DIP20101010.txt");
+	}
 	
+	public static void calGo() {
+		GOUtils goUtils = new GOUtils();
+		List<String> list = new ArrayList<String>();
+		list.add("GO_Function_annotation.txt");
+		list.add("GO_Process_annotation.txt");
+		list.add("GO_Component_annotation.txt");
+		//goUtils.calProbability(list);
+		goUtils.calSim("go_Probability.txt", list);
+	}
 	
 	/**
 	 * @param args
 	 */
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		String filePath = "DIP20101010.txt";
-		String dataPath = "Essenntial(DIP20101010).txt";
-		String outFilePath = "DIP_result.txt";
-		DCUtils dcUtils = new DCUtils(filePath, dataPath, outFilePath);
-		if (dcUtils.init()) {
-			//dcUtils.calDc();
-		}
-		
-		String filePath2 = "DIP_result.txt";
-		String dataPath2 = "result36.txt";
-		String outFilePath2 = "SC_net_pcc_result.txt";
-		String outFilePath3 = "dpcc.txt";
-		/*PCCUtils pccUtils = new PCCUtils(filePath, dataPath2, outFilePath2);
-		pccUtils.init();
-		pccUtils.calPcc();*/
-		
-		DPCC dpcc = new DPCC(outFilePath, outFilePath2, outFilePath3);
-		/*dpcc.init();
-		dpcc.getDPCC();
-		dpcc.getFisher(); /*/
-		/*DCUtils dcUtils = new DCUtils(filePath, dataPath, outFilePath);
-		if (dcUtils.init()) {
-			dcUtils.calDc();
-		}*/
-		
-		//dpcc.goFilter();
-		dpcc.statistics();
+		//calEcc();
+		calGo();
 	}
 	
 

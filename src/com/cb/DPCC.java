@@ -153,8 +153,8 @@ public class DPCC {
 			result.add(item + "	" + ret);
 		}
 		System.out.println("均值：" + sum/count);
-		double up = sum/count + 1000;
-		double down = sum/count - 1.64;
+		double up = sum/count + 1.5;
+		double down = sum/count - 1.5;
 		System.out.println("上界：" + up);
 		System.out.println("下界：" + down);
 		try {
@@ -207,7 +207,7 @@ public class DPCC {
 			e.printStackTrace();
 		}
 		try {
-			FileReader ins = new FileReader("go_SC_net_result.txt");
+			FileReader ins = new FileReader("SC_net_fisher_filter_result.txt");
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -221,19 +221,19 @@ public class DPCC {
 		
 		for (int i = 1; i < 6; i++) {
 			int count1 = 0, count2 = 0;
-			for (int j = 0; j < i * 5 * listPcc.size() / 100; j++) {
+			for (int j = 0; j < i * 5 * listOrigin.size() / 100; j++) {
 				String data = listOrigin.get(j).split("	")[2];
 				if (Integer.parseInt(data) == 1) {
 					count1++;
 				}
 			}
-			for (int j = 0; j < i * 5 * listPcc.size() / 100; j++) {
+			for (int j = 0; j < i * 5 * listOrigin.size() / 100; j++) {
 				String data = listPcc.get(j).split("	")[2];
 				if (Integer.parseInt(data) == 1) {
 					count2++;
 				}
 			}
-			//System.out.println(count1 * 1.0 / (i * 5 * listPcc.size() / 100) + " "  + count2 * 1.0 / (i * 5 * listPcc.size() / 100));
+			//System.out.println(count1 * 1.0 / (i * 5 * listOrigin.size() / 100) + " "  + count2 * 1.0 / (i * 5 * listOrigin.size() / 100));
 			System.out.println(count1 + " " + count2);
 		}
 		

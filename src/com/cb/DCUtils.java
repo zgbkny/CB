@@ -19,27 +19,13 @@ import java.util.Set;
 import java.util.TreeMap;
 
 public class DCUtils {
-	private String filePath;
-	private String dataPath;
-	private String outFilePath;
-	private FileInputStream fip;
-	private FileInputStream dip;
-	private FileOutputStream fop;
-	
-	
-	public DCUtils (String filePath, String dataPath, String outFilePath) {
-		this.filePath = filePath;
-		this.outFilePath = outFilePath;
-		this.dataPath = dataPath;
-	}
-	public boolean init() {
-		return true;
-	}
-	private Map<String, Integer> getDc() {
+
+		
+	private Map<String, Integer> getDc(String filepath) {
 		Map<String, Integer> map= new HashMap<String, Integer>();
 		
 		try {
-			FileReader ins = new FileReader("go_sc_net_filter.txt");
+			FileReader ins = new FileReader(filepath);
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -64,11 +50,11 @@ public class DCUtils {
 		System.out.println(map.get("YHR110W"));
 		return map;
 	}
-	private HashSet<String> initData() {
+	private HashSet<String> initData(String datapath) {
 		HashSet<String> hashSet= new HashSet<String>();
 		
 		try {
-			FileReader ins = new FileReader("Essential.txt");
+			FileReader ins = new FileReader(datapath);
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -83,9 +69,10 @@ public class DCUtils {
 		System.out.println(hashSet.contains("YHR110W"));
 		return hashSet;
 	}
-	private boolean checkDc(Map<String, Integer> map, HashSet<String> hashSet) {
+	private boolean checkDc(Map<String, Integer> map, HashSet<String> hashSet, String filepath) {
 		
-		File outFile = new File("go_SC_net_result.txt");
+		File outFile = new File("dc_" + filepath);
+		FileOutputStream fop = null;
 		try {
 			fop = new FileOutputStream(outFile);
 		} catch (FileNotFoundException e1) {
@@ -98,7 +85,6 @@ public class DCUtils {
 		List<Map.Entry<String, Integer>> infoIds =
 			    new ArrayList<Map.Entry<String, Integer>>(map.entrySet());
 		
-		//����
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Integer>>() {   
 		    public int compare(Map.Entry<String, Integer> o1, Map.Entry<String, Integer> o2) {      
 		        return (o2.getValue() - o1.getValue()); 
@@ -131,8 +117,8 @@ public class DCUtils {
 		return true;
 	}
 	
-	public void calDc() {
-		checkDc(getDc(), initData());
+	public void calDc(String filepath, String datapath) {
+		checkDc(getDc(filepath), initData(datapath), filepath);
 	}
 	
 	
