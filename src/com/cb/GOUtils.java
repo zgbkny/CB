@@ -348,6 +348,7 @@ public class GOUtils {
 		PrintStream out = new PrintStream(fop);
 		
 		for (String item : danList) {
+			System.out.println(item);
 			String strs[] = item.split("	");
 			System.out.println(strs[0] + " " + strs[1]);
 			Set<String> set1 = getGoSet(strs[0], graph);

@@ -11,10 +11,10 @@ public class cb {
 
 	public static void calEcc() {
 		DCUtils dcUtils = new DCUtils();
-		dcUtils.calDc("DIP20101010.txt", "Essential.txt");
+		dcUtils.calDc("Y2k.txt", "Essential.txt");
 		
 		ECCUtils eccUtils = new ECCUtils();
-		eccUtils.calEcc("DIP20101010.txt");
+		eccUtils.calEcc("Y2k.txt");
 	}
 	
 	public static void calGo() {
@@ -25,8 +25,18 @@ public class cb {
 		list.add("GO_Component_annotation.txt");
 		//goUtils.calProbability(list);
 		//goUtils.calSim("go_Probability.txt", list);
-		//goUtils.calFS("SC_net.txt", "go_sim.txt", list);
+		goUtils.calFS("Y2k.txt", "go_sim.txt", list);
 		goUtils.normalize("go_FS.txt");
+	}
+	
+	public static void calPcc() {
+		PCCUtils pccUtils = new PCCUtils();
+		pccUtils.calPcc("Y2k.txt", "result36.txt");
+	}
+	
+	public static void cl() {
+		CBUtils cb = new CBUtils();
+		cb.classify("ecc_DIP20101010.txt", "Essential.txt");
 	}
 	
 	/**
@@ -35,7 +45,9 @@ public class cb {
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
 		//calEcc();
-		calGo();
+		//calGo();
+		//calPcc();
+		cl();
 	}
 	
 

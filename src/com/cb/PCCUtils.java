@@ -9,6 +9,8 @@ import java.io.FileReader;
 import java.io.IOException;
 import java.io.PrintStream;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
@@ -16,42 +18,21 @@ import java.util.Map;
 import java.util.Set;
 
 public class PCCUtils {
-	private String filePath;
-	private String dataPath;
-	private String outFilePath;
+
 	
 	private FileInputStream fip;
 	private FileInputStream dip;
 	private FileOutputStream fop;
 	
-	public PCCUtils(String filePath, String dataPath, String outFilePath) {
-		this.filePath = filePath;
-		this.dataPath = dataPath;
-		this.outFilePath = outFilePath;
+	public PCCUtils() {
 	}
 	
-	public boolean init() {
-		File file = new File(filePath);
-		File outFile = new File(outFilePath);
-		if (file.exists() && file.isFile()
-				&& (!outFile.exists() || outFile.isFile())) {
-			try {
-				fip = new FileInputStream(file);
-				fop = new FileOutputStream(outFile);
-				return true;
-			} catch (FileNotFoundException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-				return false;
-			}
-		} else return false;
-	}
 	
-	private Set<String> initItem() {
+	private Set<String> initItem(String filepath) {
 		HashSet<String> hashSet= new HashSet<String>();
 		
 		try {
-			FileReader ins = new FileReader(filePath);
+			FileReader ins = new FileReader(filepath);
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -70,11 +51,11 @@ public class PCCUtils {
 		return hashSet;
 	}
 	
-	private Map<String, List<Double>> initData() {
+	private Map<String, List<Double>> initData(String datapath) {
 		HashMap<String, List<Double>> map= new HashMap<String, List<Double>>();
 		
 		try {
-			FileReader ins = new FileReader(dataPath);
+			FileReader ins = new FileReader(datapath);
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
@@ -123,10 +104,19 @@ public class PCCUtils {
         return num/den;
 	}
 	
-	public void calPcc() {
+	public void calPcc(String filepath, String datapath) {
+		File outFile = new File("pcc" + filepath);
+		FileOutputStream fop = null;
+		try {
+			fop = new FileOutputStream(outFile);
+		} catch (FileNotFoundException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+		
 		PrintStream out = new PrintStream(fop);
-		Set<String> data = initItem();
-		Map<String, List<Double>> map = initData();
+		Set<String> data = initItem(filepath);
+		Map<String, List<Double>> map = initData(datapath);
 		//Object[] strs = data.toArray();
 		/*for (int i = 0; i < strs.length; i++) {
 			for (int j = i + 1; j < strs.length; j++) {
@@ -138,21 +128,34 @@ public class PCCUtils {
 				}
 			}
 		}*/
-		
+		Map<String, Double> mp = new HashMap<String, Double>();
 		for (String item:data) {
 			String [] items = item.split("	");
 			if (map.get(items[0]) != null && map.get(items[1]) != null) {
 				double ret = pcc(map.get(items[0]), map.get(items[1]));
-				out.print(items[0] + "	" + items[1] + "	" + ret + "\n");
+				ret = Math.abs(ret);
+				mp.put(items[0] + "	" + items[1], ret);
+				//out.print(items[0] + "	" + items[1] + "	" + ret + "\n");
 			}
-			//return;
-			
-			
+			//return;	
 		}
+		
+		List<Map.Entry<String, Double>> infoIds =
+		    new ArrayList<Map.Entry<String, Double>>(mp.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {   
+		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
+		        return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
+		        //return (o1.getKey()).toString().compareTo(o2.getKey());
+		    }
+		});
+
+		for(Map.Entry<String,Double> e : infoIds) {
+			out.print(e.getKey() + "	" + e.getValue()  + "\n");
+		}
+		
 		
 		try {
 			fop.close();
-			fip.close();
 			//dip.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
