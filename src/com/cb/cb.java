@@ -24,7 +24,9 @@ public class cb {
 		list.add("GO_Process_annotation.txt");
 		list.add("GO_Component_annotation.txt");
 		//goUtils.calProbability(list);
-		goUtils.calSim("go_Probability.txt", list);
+		//goUtils.calSim("go_Probability.txt", list);
+		//goUtils.calFS("SC_net.txt", "go_sim.txt", list);
+		goUtils.normalize("go_FS.txt");
 	}
 	
 	/**
