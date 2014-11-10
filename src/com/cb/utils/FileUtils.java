@@ -1,4 +1,4 @@
-package com.ab.utils;
+package com.cb.utils;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -11,7 +11,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import com.ab.global.Global;
+import com.cb.global.Global;
 
 public class FileUtils {
 	public static Set<String> getEssentialSet() {
