@@ -30,11 +30,12 @@ public class Season3 {
 		
 		List<String> edges = EdgeUtils.getEdge(filepath);
 		Set<String> set = new HashSet<String>();
+		Set<String> topAllSet = new HashSet<String>();
 		Set<String> essSet = null;
 		int essCountInFile = 0, essCountInTopSize = 0;
 		//List<String> data = new ArrayList<String>(); 
 		essSet = FileUtils.getEssentialSet();
-		essCountInFile = EdgeUtils.getTotalEssentialNodeCount(edges);
+		//essCountInFile = EdgeUtils.getTotalEssentialNodeCount(edges);
 		
 		for (int i = 0; i < (1.0 * size * edges.size() / 100); i++) {
 			String []items = edges.get(i).split("	");
@@ -45,11 +46,23 @@ public class Season3 {
 				}
 			}
 			
+			
 			if (!set.contains(items[1])) {
 				set.add(items[1]);
 				if (essSet.contains(items[1])) {
 					essCountInTopSize++;
 				}
+			}
+			
+			if (!topAllSet.contains(items[0])) {
+				set.add(items[0]);
+				essCountInFile++;
+			}
+			
+			
+			if (!topAllSet.contains(items[1])) {
+				set.add(items[1]);
+				essCountInFile++;
 			}
 		}
 
