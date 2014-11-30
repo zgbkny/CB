@@ -17,7 +17,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.cb.utils.EdgeUtils;
-import com.cb.utils.FileUtils;
+import com.cb.utils.EssUtils;
 
 public class Season3 {
 	/**
@@ -34,7 +34,7 @@ public class Season3 {
 		Set<String> essSet = null;
 		int essCountInFile = 0, essCountInTopSize = 0;
 		//List<String> data = new ArrayList<String>(); 
-		essSet = FileUtils.getEssentialSet();
+		essSet = EssUtils.getEssentialSet();
 		//essCountInFile = EdgeUtils.getTotalEssentialNodeCount(edges);
 		
 		for (int i = 0; i < (1.0 * size * edges.size() / 100); i++) {

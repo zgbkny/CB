@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cb.utils.CBUtils;
 import com.cb.utils.DCUtils;
+import com.cb.utils.PCCUtils;
 
 public class cb {
 
@@ -35,7 +36,7 @@ public class cb {
 	
 	public static void calPcc() {
 		PCCUtils pccUtils = new PCCUtils();
-		pccUtils.calPcc("SC_net.txt", "result36.txt");
+		pccUtils.calPcc("SC_net.txt", null, "result36.txt");
 	}
 	
 	public static void cl() {
@@ -256,6 +257,10 @@ public class cb {
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 99);
 	}
 	
+	public static void the4() {
+		Season4 season = new Season4();
+		season.core();
+	}
 	
 	/**
 	 * @param args
@@ -266,7 +271,7 @@ public class cb {
 		//calGo();
 		//calPcc();
 		//cl();
-		the3();
+		the4();
 	}
 	
 }

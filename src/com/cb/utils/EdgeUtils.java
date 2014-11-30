@@ -69,7 +69,7 @@ public class EdgeUtils {
 	public static int getTotalEssentialNodeCount(List<String> edges) {
 		int sum = 0;
 		Set<String> set = new HashSet<String>();
-		Set<String> essSet = FileUtils.getEssentialSet();
+		Set<String> essSet = EssUtils.getEssentialSet();
 		
 		try {
 			for (String edge : edges) {

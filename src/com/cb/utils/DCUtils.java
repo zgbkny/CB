@@ -21,7 +21,7 @@ import java.util.TreeMap;
 public class DCUtils {
 
 		
-	private Map<String, Integer> getDc(String filepath) {
+	public static Map<String, Integer> getDc(String filepath) {
 		Map<String, Integer> map= new HashMap<String, Integer>();
 		
 		try {
@@ -47,31 +47,13 @@ public class DCUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println(map.get("YHR110W"));
+		System.out.println("get dc done....");
 		return map;
 	}
-	private HashSet<String> initData(String datapath) {
-		HashSet<String> hashSet= new HashSet<String>();
+	
+	private static boolean checkDc(Map<String, Integer> map, Set<String> set, String filepath) {
 		
-		try {
-			FileReader ins = new FileReader(datapath);
-			BufferedReader readBuf = new BufferedReader(ins);
-			String buf = null;
-			while ((buf = readBuf.readLine()) != null) {
-				//String [] strs = buf.split("	");
-				hashSet.add(buf);
-			}
-			
-		} catch (IOException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		System.out.println(hashSet.contains("YHR110W"));
-		return hashSet;
-	}
-	private boolean checkDc(Map<String, Integer> map, HashSet<String> hashSet, String filepath) {
-		
-		File outFile = new File("dc_" + filepath);
+		File outFile = new File(filepath);
 		FileOutputStream fop = null;
 		try {
 			fop = new FileOutputStream(outFile);
@@ -95,16 +77,13 @@ public class DCUtils {
 		int i = 0;
 		for(Map.Entry<String,Integer> e : infoIds) {
 			System.out.println(e.getKey() + "::::" + e.getValue());
-			//System.out.println(item + ";");
-			if (hashSet.contains(e.getKey())) {
+			if (set.contains(e.getKey())) {
 				out.print(e.getKey() + "	" + e.getValue() + "	" +"1\n");
 			} else {
 				out.print(e.getKey() + "	" + e.getValue() + "	" +"0\n");
-				//System.out.println("0");
+
 			}
 		}
-		
-		
 		
 		try {
 			fop.close();
@@ -117,8 +96,8 @@ public class DCUtils {
 		return true;
 	}
 	
-	public void calDc(String filepath, String datapath) {
-		checkDc(getDc(filepath), initData(datapath), filepath);
+	public static void calDc(String infilepath, String outfilepath) {
+		checkDc(getDc(infilepath), EssUtils.getEssentialSet(), outfilepath);
 	}
 	
 	
