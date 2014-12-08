@@ -52,6 +52,8 @@ public class cb {
 	 */
 	public static void the3() {
 		Season3 s3 = new Season3();
+		
+		/*
 		System.out.println("bc_DIP20101010:-------------------------------------------------------------------------");
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 1);
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 5);
@@ -255,10 +257,16 @@ public class cb {
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 90);
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 95);
 		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 99);
+		*/
 	}
 	
 	public static void the4() {
 		Season4 season = new Season4();
+		season.core();
+	}
+	
+	public static void the5() {
+		Season5 season = new Season5();
 		season.core();
 	}
 	
@@ -271,7 +279,7 @@ public class cb {
 		//calGo();
 		//calPcc();
 		//cl();
-		the4();
+		the5();
 	}
 	
 }

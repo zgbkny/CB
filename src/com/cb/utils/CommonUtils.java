@@ -1,6 +1,7 @@
 package com.cb.utils;
 
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.FileReader;
@@ -16,6 +17,28 @@ import java.util.Set;
 import com.cb.global.Global;
 
 public class CommonUtils {
+	
+	public static List<String> getFilesInPath(String path) {
+		File file = new File(path);
+		if (!file.isDirectory()) return null;
+		List<String> outList = new ArrayList<String>();
+		File[] t = file.listFiles();
+		System.out.println(t);
+        for(int i = 0; i < t.length; i++){
+            //判断文件列表中的对象是否为文件夹对象，如果是则执行tree递归，直到把此文件夹中所有文件输出为止
+            if(t[i].isDirectory()){
+
+            }
+            else{
+
+                if (t[i].getName().length() < 30) {
+                	outList.add(t[i].getAbsolutePath());
+                	System.out.println(t[i].getAbsolutePath());
+                }
+            }
+        }
+        return outList;
+	}
 	
 	public static Map<String, Double> getInputFileMap(String filepath) {
 		Map<String, Double> mp = new HashMap<String, Double>();
@@ -33,6 +56,24 @@ public class CommonUtils {
 		return mp;
 	}
 	
+	public static Set<String> getInputFileSet(String filepath) {
+		HashSet<String> hashSet= new HashSet<String>();
+		
+		try {
+			FileReader ins = new FileReader(filepath);
+			BufferedReader readBuf = new BufferedReader(ins);
+			String buf = null;
+			while ((buf = readBuf.readLine()) != null) {
+
+				hashSet.add(buf);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return hashSet;
+	}
+	
 	public static List<String> getInputFile(String filepath) {
 		List<String> list = new ArrayList<String>();
 		
@@ -48,7 +89,7 @@ public class CommonUtils {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		System.out.println("get inputFile done....");
+		//System.out.println("get inputFile done....");
 		return list;
 	}
 	
