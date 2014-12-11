@@ -10,6 +10,35 @@ import java.util.Set;
 
 public class PCC {
 	
+	
+	/**
+	 * 功能：求各个点的pcc和
+	 * @param list List<String(点  点  pcc)>
+	 * @return
+	 */
+	public Map<String, Double> calSumPcc(List<String> list) {
+		Map<String, Double> map = new HashMap<String, Double>();
+		
+		for (String item : list) {
+			String []items = item.split("	");
+			double value = Double.parseDouble(items[2]);
+			if (map.containsKey(items[0])) {
+				map.put(items[0], map.get(items[0]) + value);
+			} else {
+				map.put(items[0], value);
+			}
+			
+			if (map.containsKey(items[1])) {
+				map.put(items[1], map.get(items[1]) + value);
+			} else {
+				map.put(items[1], value);
+			}
+		}
+		
+		return map;
+	}
+	
+	
 	private static double pcc(List<Double> X, List<Double> Y) {
 		double sumX = 0, sumY = 0, 
 			   sumXSq = 0, sumYSq = 0,

@@ -31,10 +31,10 @@ public class CommonUtils {
             }
             else{
 
-                if (t[i].getName().length() < 30) {
+                //if (t[i].getName().length() < 30) {
                 	outList.add(t[i].getAbsolutePath());
                 	System.out.println(t[i].getAbsolutePath());
-                }
+                //}
             }
         }
         return outList;

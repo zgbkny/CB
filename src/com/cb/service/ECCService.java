@@ -10,6 +10,7 @@ import java.util.Map;
 
 import com.cb.algorithms.DC;
 import com.cb.algorithms.ECC;
+import com.cb.stat.Statistics;
 import com.cb.utils.CommonUtils;
 import com.cb.utils.GraphUtils;
 
@@ -25,6 +26,13 @@ public class ECCService {
 		DC dc = new DC();
 		Map<String, Integer> dcMap = dc.calDC(list);
 		List<String> outList = ecc.calEcc(list, dcMap, graph);
+		CommonUtils.outputFile(outpath, outList);
+	}
+	
+	public void calSumEcc(String inpath, String outpath) {
+		List<String> list = CommonUtils.getInputFile(inpath);
+		Map<String, Double> map = ecc.calSumEcc(list);
+		List<String> outList = Statistics.sortMap(map);
 		CommonUtils.outputFile(outpath, outList);
 	}
 	

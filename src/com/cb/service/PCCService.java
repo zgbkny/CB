@@ -10,6 +10,7 @@ import java.util.Map;
 import java.util.Set;
 
 import com.cb.algorithms.PCC;
+import com.cb.stat.Statistics;
 import com.cb.utils.CommonUtils;
 
 public class PCCService {
@@ -35,7 +36,7 @@ public class PCCService {
 			while ((buf = readBuf.readLine()) != null) {
 				String [] strs = buf.split("  ");
 				//System.out.println(strs[0] + ";" + strs[1] + ";");
-				System.out.println(strs[1]);
+				//System.out.println(strs[1]);
 				if (!strs[1].equals("non-annotated") && map.get(strs[1]) == null) {
 					List<Double> list = new ArrayList<Double>();
 					for (int i = 2; i < strs.length; i++) {
@@ -51,5 +52,13 @@ public class PCCService {
 			e.printStackTrace();
 		}
 		return map;
+	}
+	
+	
+	public void calSumPcc(String inpath, String outpath) {
+		List<String> list = CommonUtils.getInputFile(inpath);
+		Map<String, Double> map = pcc.calSumPcc(list);
+		List<String> outList = Statistics.sortMap(map);
+		CommonUtils.outputFile(outpath, outList);
 	}
 }

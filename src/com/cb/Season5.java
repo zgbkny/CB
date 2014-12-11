@@ -17,8 +17,10 @@ import com.cb.service.BCService;
 import com.cb.service.CCService;
 import com.cb.service.CommonService;
 import com.cb.service.DCService;
+import com.cb.service.ECCService;
 import com.cb.service.ECService;
 import com.cb.service.OneDegreeService;
+import com.cb.service.PCCService;
 import com.cb.service.SCService;
 import com.cb.service.StatService;
 import com.cb.service.SubcellularService;
@@ -37,10 +39,39 @@ public class Season5 {
 	
 	public static final String PeC_nucleusppi_esldb = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\PeC\\PeC_esldb_nuleusppi.txt";
 	public static final String PeC_nucleusppi = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\PeC\\PeC_nuleusppi.txt";
+	
+	
 	public static final String onedu_nucleusppi = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu\\nucleusppi.txt";
 	public static final String subc_nucleusppi = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc\\nucleusppi.txt";
 	public static final String onedu_subc_nucleusppi = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu_subc\\nucleusppi.txt";
 	public static final String subc_onedu_nucleusppi = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc_onedu\\nucleusppi.txt";
+	
+	public static final String nucleusppi_ecc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\nucleusppi_ecc.txt";
+	public static final String onedu_nucleusppi_ecc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu\\nucleusppi_ecc.txt";
+	public static final String subc_nucleusppi_ecc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc\\nucleusppi_ecc.txt";
+	public static final String onedu_subc_nucleusppi_ecc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu_subc\\nucleusppi_ecc.txt";
+	public static final String subc_onedu_nucleusppi_ecc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc_onedu\\nucleusppi_ecc.txt";
+	
+	public static final String nucleusppi_pcc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\nucleusppi_pcc.txt";
+	public static final String onedu_nucleusppi_pcc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu\\nucleusppi_pcc.txt";
+	public static final String subc_nucleusppi_pcc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc\\nucleusppi_pcc.txt";
+	public static final String onedu_subc_nucleusppi_pcc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu_subc\\nucleusppi_pcc.txt";
+	public static final String subc_onedu_nucleusppi_pcc = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc_onedu\\nucleusppi_pcc.txt";
+	
+	
+	public static final String nucleusppi_ecc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\nucleusppi_ecc_sum.txt";
+	public static final String onedu_nucleusppi_ecc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu\\nucleusppi_ecc_sum.txt";
+	public static final String subc_nucleusppi_ecc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc\\nucleusppi_ecc_sum.txt";
+	public static final String onedu_subc_nucleusppi_ecc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu_subc\\nucleusppi_ecc_sum.txt";
+	public static final String subc_onedu_nucleusppi_ecc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc_onedu\\nucleusppi_ecc_sum.txt";
+	
+	public static final String nucleusppi_pcc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\nucleusppi_pcc_sum.txt";
+	public static final String onedu_nucleusppi_pcc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu\\nucleusppi_pcc_sum.txt";
+	public static final String subc_nucleusppi_pcc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc\\nucleusppi_pcc_sum.txt";
+	public static final String onedu_subc_nucleusppi_pcc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\onedu_subc\\nucleusppi_pcc_sum.txt";
+	public static final String subc_onedu_nucleusppi_pcc_sum = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\subc_onedu\\nucleusppi_pcc_sum.txt";
+	
+	
 	public static final String season5_temp = "F:\\金山网盘\\data\\CB\\不同数据集的权值\\temp\\temp.txt";
 	
 	public static final String np_origin = "F:\\金山网盘\\data\\Nucleus_PPI_degree_ec_sc_bc_cc_out.txt";
@@ -117,11 +148,42 @@ public class Season5 {
 		cs.getAndOrderDc(np_1du_subc, np_1du_subc_ec, 2);
 		cs.getAndOrderDc(np_1du_subc, np_1du_subc_sc, 3);
 		cs.getAndOrderDc(np_1du_subc, np_1du_subc_bc, 4);
-		cs.getAndOrderDc(np_1du_subc, np_1du_subc_cc, 5);*/
+		cs.getAndOrderDc(np_1du_subc, np_1du_subc_cc, 5);
 		
 		StatService statService = new StatService();
 		statService.statFiles("F:\\金山网盘\\data");
 		
+		ECCService eccService = new ECCService();
+		PCCService pccService = new PCCService();
+		eccService.calEcc(Global.nucleusppiFile, nucleusppi_ecc);
+		eccService.calEcc(subc_nucleusppi, subc_nucleusppi_ecc);
+		eccService.calEcc(onedu_nucleusppi, onedu_nucleusppi_ecc);
+		eccService.calEcc(subc_onedu_nucleusppi, subc_onedu_nucleusppi_ecc);
+		eccService.calEcc(onedu_subc_nucleusppi, onedu_subc_nucleusppi_ecc);
+		
+		pccService.calPcc(Global.nucleusppiFile, "result36.txt", nucleusppi_pcc);
+		pccService.calPcc(subc_nucleusppi, "result36.txt", subc_nucleusppi_pcc);
+		pccService.calPcc(onedu_nucleusppi, "result36.txt", onedu_nucleusppi_pcc);
+		pccService.calPcc(subc_onedu_nucleusppi, "result36.txt", subc_onedu_nucleusppi_pcc);
+		pccService.calPcc(onedu_subc_nucleusppi, "result36.txt", onedu_subc_nucleusppi_pcc);
+		
+
+		eccService.calSumEcc(nucleusppi_ecc, nucleusppi_ecc_sum);
+		eccService.calSumEcc(subc_nucleusppi_ecc, subc_nucleusppi_ecc_sum);
+		eccService.calSumEcc(onedu_nucleusppi_ecc, onedu_nucleusppi_ecc_sum);
+		eccService.calSumEcc(subc_onedu_nucleusppi_ecc, subc_onedu_nucleusppi_ecc_sum);
+		eccService.calSumEcc(onedu_subc_nucleusppi_ecc, onedu_subc_nucleusppi_ecc_sum);
+		
+		pccService.calSumPcc(nucleusppi_pcc, nucleusppi_pcc_sum);
+		pccService.calSumPcc(subc_nucleusppi_pcc, subc_nucleusppi_pcc_sum);
+		pccService.calSumPcc(onedu_nucleusppi_pcc, onedu_nucleusppi_pcc_sum);
+		pccService.calSumPcc(subc_onedu_nucleusppi_pcc, subc_onedu_nucleusppi_pcc_sum);
+		pccService.calSumPcc(onedu_subc_nucleusppi_pcc, onedu_subc_nucleusppi_pcc_sum);
+		*/
+		
+		
+		StatService statService = new StatService();
+		statService.statFilesByNum("F:\\金山网盘\\data\\CB\\inpath");
 		
 		
 		/*
