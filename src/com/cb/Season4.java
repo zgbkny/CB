@@ -23,7 +23,7 @@ public class Season4 {
 		HubUtils.calHub("F:\\金山网盘\\data\\CB\\不同数据集的权值\\dc\\dc_Nucleus_PPI.txt", 
 				"F:\\金山网盘\\data\\CB\\不同数据集的权值\\hub\\hub_Nucleus_PPI.txt");
 		PCCUtils.calPcc(Global.nucleusppiFile, nucleusppipcc, "result36.txt");
-		HubUtils.getHubValue(nucleusppihub, nucleusppiavgpcc, nucleusppipcc);
+		HubUtils.calHubValue(nucleusppihub, nucleusppiavgpcc, nucleusppipcc);
 		CommonUtils.stat(nucleusppiavgpcc, nucleusppihubstat, -1, 1, 100);
 		
 		

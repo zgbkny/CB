@@ -40,7 +40,7 @@ public class CommonUtils {
         return outList;
 	}
 	
-	public static Map<String, Double> getInputFileMap(String filepath) {
+	public static Map<String, Double> getInputFileMapWithoutValue(String filepath) {
 		Map<String, Double> mp = new HashMap<String, Double>();
 		try {
 			FileReader ins = new FileReader(filepath);
@@ -48,6 +48,40 @@ public class CommonUtils {
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
 				mp.put(buf.split("	")[0], 0.0);
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mp;
+	}
+	
+	public static Map<String, Double> getInputFileMap(String filepath) {
+		Map<String, Double> mp = new HashMap<String, Double>();
+		try {
+			FileReader ins = new FileReader(filepath);
+			BufferedReader readBuf = new BufferedReader(ins);
+			String buf = null;
+			while ((buf = readBuf.readLine()) != null) {
+				mp.put(buf.split("	")[0], Double.parseDouble(buf.split("	")[1]));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return mp;
+	}
+	
+	
+	
+	public static Map<String, Double> getInputFileMap(String filepath, int key, int value) {
+		Map<String, Double> mp = new HashMap<String, Double>();
+		try {
+			FileReader ins = new FileReader(filepath);
+			BufferedReader readBuf = new BufferedReader(ins);
+			String buf = null;
+			while ((buf = readBuf.readLine()) != null) {
+				mp.put(buf.split("	")[key], Double.parseDouble(buf.split("	")[value]));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -104,6 +138,7 @@ public class CommonUtils {
 		}
 		PrintStream out = new PrintStream(fop);
 		for (String line : data) {
+			//System.out.println(line);
 			out.print(line + "\n");
 		}
 		try {

@@ -6,6 +6,7 @@ import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import com.cb.entity.*;
 
 public class ECC {
 	/**
@@ -58,6 +59,8 @@ public class ECC {
 			}
 			//System.out.println(num1 + " " + num2);
 			double ret = num1 * 1.0 / (num2 - 1);
+			
+			//double ret = num1 / (num2 - 1);
 			map.put(str, ret);
 		}
 		List<Map.Entry<String, Double>> infoIds =
@@ -92,4 +95,36 @@ public class ECC {
 		}
 		return num;
 	}
+	
+	
+	  public static float Ecc(Edge edge)
+	  {
+	    int num = 0;
+	    float xishuemp = 0.0F;
+	    ArrayList list_xishu = new ArrayList();
+	    ArrayList list_xishu2 = new ArrayList();
+	    list_xishu.addAll(edge.nodeL.nodelist);
+	    list_xishu2.addAll(edge.nodeR.nodelist);
+	    list_xishu.retainAll(list_xishu2);
+	    for (int i = 0; i < list_xishu.size(); i++)
+	    {
+	      if (((Node)list_xishu.get(i)).essential != 1)
+	        continue;
+	      num++;
+	    }
+
+	    num++;
+	    num = list_xishu.size() + 1;
+	    System.out.println("共同的节点" + num);
+	    if (edge.nodeL.nodelist.size() >= edge.nodeR.nodelist.size())
+	    {
+	      xishuemp = (float) (num * 1.0 / edge.nodeR.nodelist.size());
+	      System.out.println(edge.nodeL.nodename + " " + edge.nodeR.nodename + " " + "边的聚集系数" + xishuemp + "**");
+	      return xishuemp;
+	    }
+
+	    xishuemp = (float) (num * 1.0 / edge.nodeL.nodelist.size());
+	    System.out.println(edge.nodeL.nodename + " " + edge.nodeR.nodename + " " + "边的聚集系数" + xishuemp + "**");
+	    return xishuemp;
+	  }
 }

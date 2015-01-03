@@ -19,7 +19,12 @@ public class DCService {
 		dc = new DC();
 	}
 	
-	
+	public void calDCs(String path) {
+		List<String> list = CommonUtils.getFilesInPath(path);
+		for (String inpath : list) {
+			calDC(inpath, inpath.replaceAll(".txt", "_dc.txt"));
+		}
+	}
 	public void calDC(String inpath, String outpath) {
 		List<String> list = CommonUtils.getInputFile(inpath);
 		List<String> outList = new ArrayList<String>();
@@ -38,11 +43,14 @@ public class DCService {
 		for(Map.Entry<String,Integer> e : infoIds) {
 			System.out.println(e.getKey() + "::::" + e.getValue());
 			if (essSet.contains(e.getKey())) {
-				list.add(e.getKey() + "	" + e.getValue() + "	" +"1\n");
+				System.out.println("check 1");
+				outList.add(e.getKey() + "	" + e.getValue() + "	" +"1");
 			} else {
-				list.add(e.getKey() + "	" + e.getValue() + "	" +"0\n");
+				System.out.println("check 0");
+				outList.add(e.getKey() + "	" + e.getValue() + "	" +"0");
 			}
 		}
+
 		CommonUtils.outputFile(outpath, outList);
 	}
 	

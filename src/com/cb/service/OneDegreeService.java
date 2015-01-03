@@ -27,15 +27,23 @@ public class OneDegreeService {
 		Map<String, Integer> map = dc.calDC(list);
 		Set<String> set = od.process(map);
 		List<String> outList = new ArrayList<String>();
+		System.out.println("size:" + set.size());
+		int count = 0;
 		for (String str : list) {
 			String []strs = str.split("	");
+			
+			if (set.contains(strs[0]) && set.contains(strs[1])) {
+				System.out.println(str);
+				count++;
+			}
+			
 			if (set.contains(strs[0]) || set.contains(strs[1])) {
-				
+				//System.out.println("onedu :" + str);
 			} else {
 				outList.add(str);
 			}
 		}
-		
+		System.out.println("check" + count);
 		CommonUtils.outputFile(outpath, outList);
 	}
 }

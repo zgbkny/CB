@@ -7,6 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.cb.service.StatService;
 import com.cb.utils.CBUtils;
 import com.cb.utils.DCUtils;
 import com.cb.utils.PCCUtils;
@@ -53,211 +54,7 @@ public class cb {
 	public static void the3() {
 		Season3 s3 = new Season3();
 		
-		/*
-		System.out.println("bc_DIP20101010:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_DIP20101010.txt", null, 99);
-		System.out.println("bc_SC_net:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_SC_net.txt", null, 99);
-		System.out.println("bc_Y2k:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\bc\\bc_normal_Y2k.txt", null, 99);
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		
-		System.out.println("ecc_DIP20101010:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_DIP20101010.txt", null, 99);
-		System.out.println("ecc_SC_net:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_SC_net.txt", null, 99);
-		System.out.println("ecc_Y2k:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\ecc\\ecc_normal_Y2k.txt", null, 99);
-		
-		
-		System.out.println("++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-		System.out.println("pcc_DIP20101010:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_DIP20101010.txt", null, 99);
-		System.out.println("pcc_SC_net:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_SC_net.txt", null, 99);
-		System.out.println("pcc_Y2k:-------------------------------------------------------------------------");
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 1);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 5);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 10);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 15);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 20);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 25);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 30);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 35);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 40);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 45);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 50);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 55);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 60);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 65);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 70);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 75);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 80);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 85);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 90);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 95);
-		s3.statistic("F:\\金山网盘\\data\\CB\\不同数据集的权值\\pcc\\pcc_normal_Y2k.txt", null, 99);
-		*/
+	
 	}
 	
 	public static void the4() {
@@ -267,7 +64,30 @@ public class cb {
 	
 	public static void the5() {
 		Season5 season = new Season5();
+		season.core2();
+	}
+	public static void the6() {
+		Season6 season = new Season6();
 		season.core();
+	}
+	
+	public static void the7() {
+		Season7 season = new Season7();
+		//season.checkHub();
+		season.calNewValueByPartyDateHub(0.5, 0.4, 0.5);
+		season.calNewValueByPartyDateHub(0.5, 0.3, 0.5);
+		season.calNewValueByPartyDateHub(0.5, 0.2, 0.5);
+		season.calNewValueByPartyDateHub(0.5, 0.1, 0.5);
+	
+		double i = 0.1, j = 0.1; 
+		for ( ; i < 0.99; i += 0.1) {
+			
+			for (j = 0.1 ; j <= 0.5; j += 0.1 ) {
+				season.calNewValueByPartyDateHub(0.5, i, j);
+			}
+		}
+		
+		//new StatService().statFileByNum("H:\\金山网盘\\data\\CB\\inpath");
 	}
 	
 	/**
@@ -279,7 +99,8 @@ public class cb {
 		//calGo();
 		//calPcc();
 		//cl();
-		the5();
+		//the5();
+		the7();
 	}
 	
 }

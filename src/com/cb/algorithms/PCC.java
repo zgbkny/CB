@@ -8,6 +8,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import com.cb.entity.Edge;
+
 public class PCC {
 	
 	
@@ -69,6 +71,7 @@ public class PCC {
 		
 		List<String> outList = new ArrayList<String>();
 		Map<String, Double> mp = new HashMap<String, Double>();
+		System.out.println(data.size());
 		for (String item : data) {
 			String [] items = item.split("	");
 			if (map.get(items[0]) != null && map.get(items[1]) != null) {
@@ -76,6 +79,8 @@ public class PCC {
 				//ret = Math.abs(ret);
 				mp.put(items[0] + "	" + items[1], ret);
 				//out.print(items[0] + "	" + items[1] + "	" + ret + "\n");
+			} else {
+				System.out.println("check");
 			}
 			//return;	
 		}
@@ -94,4 +99,44 @@ public class PCC {
 		}
 		return outList;
 	}
+	
+	
+	public static float Pcc(Edge edge)
+	  {
+	    float avg2;
+	    float avg1 = avg2 = 0.0F;
+	    int num = 0;
+	    if (edge.nodeL.geneTime.size() == edge.nodeR.geneTime.size())
+	    {
+	      num = edge.nodeL.geneTime.size();
+	      System.out.println("check " + num);
+	    }
+	    else
+	    {
+	      System.out.println("check");
+	    }
+
+	    for (int i = 0; i < num; i++) {
+	      avg1 += ((Float)edge.nodeL.geneTime.get(i)).floatValue();
+	      avg2 += ((Float)edge.nodeR.geneTime.get(i)).floatValue();
+	    }
+	    avg1 /= num;
+	    avg2 /= num;
+	    float o2;
+	    float o1 = o2 = 0.0F;
+	    for (int i = 0; i < num; i++) {
+	      o1 += (((Float)edge.nodeL.geneTime.get(i)).floatValue() - avg1) * (((Float)edge.nodeL.geneTime.get(i)).floatValue() - avg1);
+	      o2 += (((Float)edge.nodeR.geneTime.get(i)).floatValue() - avg2) * (((Float)edge.nodeR.geneTime.get(i)).floatValue() - avg2);
+	    }
+	    o1 = (float)Math.sqrt(o1 / (num - 1));
+	    o2 = (float)Math.sqrt(o2 / (num - 1));
+	    float pcc = 0.0F;
+	    for (int i = 0; i < num; i++) {
+	      pcc += (((Float)edge.nodeL.geneTime.get(i)).floatValue() - avg1) / o1 * ((((Float)edge.nodeR.geneTime.get(i)).floatValue() - avg2) / o2);
+	    }
+	    pcc /= (num - 1);
+	    System.out.println(edge.nodeL.nodename + " " + edge.nodeR.nodename + " " + "相关系数" + pcc + "**");
+	    return pcc;
+	  }
+
 }

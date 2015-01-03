@@ -8,7 +8,7 @@ import com.cb.stat.Statistics;
 import com.cb.utils.CommonUtils;
 
 public class CommonService {
-	public void getAndOrderDc(String inpath, String outpath, int index) {
+	public void getAndOrder(String inpath, String outpath, int index) {
 		List<String> list = CommonUtils.getInputFile(inpath);
 		List<String> outList = null;
 		Map<String, Double> map = new HashMap<String, Double>();
