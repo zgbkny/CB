@@ -19,6 +19,29 @@ public class HubService {
 		}
 	}
 	
+	public void calHub2(String inpath, String outpath, int percent) {
+		List<String> list = CommonUtils.getInputFile(inpath);
+		List<String> outList = new ArrayList<String>();
+		int count = (int) (list.size() * 1.0 * percent / 100);
+		double minValue = 0;//Integer.parseInt(list.get(count).split("	")[1]);
+		double sum = 0;
+		for (String item : list) {
+			String[] strs = item.split("	");
+			double val = Double.parseDouble(strs[1]);
+			sum += val;
+		}
+		minValue = (int) (sum * 1.0/ list.size());
+		
+		for (int i = 0; i < list.size(); i++) {
+			String [] items = list.get(i).split("	");
+			double value = Double.parseDouble(items[1]);
+			if (value < minValue) break;
+			outList.add(items[0] + "	" + items[1] );
+		}
+		CommonUtils.outputFile(outpath, outList);
+		System.out.println("cal hub done....");
+	}
+	
 	public void calHub(String inpath, String outpath, int percent) {
 		List<String> list = CommonUtils.getInputFile(inpath);
 		List<String> outList = new ArrayList<String>();
@@ -77,16 +100,19 @@ public class HubService {
 			//System.out.println("ret:" + e.getValue());
 		}
 		mapItems = new ArrayList<Map.Entry<String, Double>>(mapValue.entrySet());
-		
+		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
 		Collections.sort(mapItems, new Comparator<Map.Entry<String, Double>>() {   
 		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
-		        return (int)((o1.getValue()  - o2.getValue()) * 100000000); 
+		        //return (int)((o1.getValue()  - o2.getValue()) * 100000000); 
+		        if (o1.getValue() > o2.getValue()) return 1;
+		        else return -1;
 		        //return (o1.getKey()).toString().compareTo(o2.getKey());
 		    }
 		});
 		
 		for(Map.Entry<String,Double> e : mapItems) {
 			outList.add(e.getKey() + "	" + e.getValue());
+			System.out.println("cal hub val:" + e.getKey() + "	" + e.getValue());
 		}
 		
 		CommonUtils.outputFile(outfilepath, outList);
@@ -106,6 +132,7 @@ public class HubService {
 		double smallValue = 0.0, bigValue = 0.0;
 		
 		for (String str : list) {
+			
 			String items[] = str.split("	");
 			double value = Double.parseDouble(items[1]);
 			

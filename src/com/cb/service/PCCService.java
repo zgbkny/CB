@@ -20,19 +20,19 @@ import com.cb.stat.Statistics;
 import com.cb.utils.CommonUtils;
 
 public class PCCService {
-	private PCC pcc;
+	private static PCC pcc;
 	public PCCService() {
 		pcc = new PCC();
 	}
 	
-	public void calPcc(String inpath, String datapath, String outpath) {
+	public static void calPcc(String inpath, String datapath, String outpath) {
 		Map<String, List<Double>> map = initData(datapath);
 		Set<String> set = CommonUtils.getInputFileSet(inpath);
 		List<String> outList = pcc.calPcc(set, map);
 		CommonUtils.outputFile(outpath, outList);
 	}
 	
-	private Map<String, List<Double>> initData(String datapath) {
+	private static Map<String, List<Double>> initData(String datapath) {
 		HashMap<String, List<Double>> map= new HashMap<String, List<Double>>();
 		
 		try {

@@ -8,6 +8,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.cb.service.StatService;
+import com.cb.strategy.Strategy;
+import com.cb.strategy.impl.HubEcc;
+import com.cb.strategy.impl.HubUc;
 import com.cb.utils.CBUtils;
 import com.cb.utils.DCUtils;
 import com.cb.utils.PCCUtils;
@@ -74,20 +77,30 @@ public class cb {
 	public static void the7() {
 		Season7 season = new Season7();
 		//season.checkHub();
-		season.calNewValueByPartyDateHub(0.5, 0.4, 0.5);
-		season.calNewValueByPartyDateHub(0.5, 0.3, 0.5);
-		season.calNewValueByPartyDateHub(0.5, 0.2, 0.5);
-		season.calNewValueByPartyDateHub(0.5, 0.1, 0.5);
-	
+		/*
 		double i = 0.1, j = 0.1; 
 		for ( ; i < 0.99; i += 0.1) {
 			
 			for (j = 0.1 ; j <= 0.5; j += 0.1 ) {
 				season.calNewValueByPartyDateHub(0.5, i, j);
 			}
-		}
+		}*/
 		
-		//new StatService().statFileByNum("H:\\金山网盘\\data\\CB\\inpath");
+		new StatService().statFileByPercent("H:\\金山网盘\\data\\CB\\inpath");
+	}
+	public static void the8() {
+		Season8.core();
+	}
+	
+	public static void the9() {
+		Season9.pre();
+		//Season9.eccSum();
+		Season9.core();
+		Season9.stat();
+	}
+	
+	public static void the10() {
+		Season10.core();
 	}
 	
 	/**
@@ -100,7 +113,15 @@ public class cb {
 		//calPcc();
 		//cl();
 		//the5();
-		the7();
+		//the7();
+		//the8();
+		//the9();
+		//the10();
+		
+		//Strategy s = new HubEcc();
+		Strategy s = new HubUc();
+		s.action("H:\\金山网盘\\data\\CB\\inpath");
+		
 	}
 	
 }

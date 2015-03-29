@@ -18,6 +18,8 @@ import com.cb.global.Global;
 
 public class CommonUtils {
 	
+	
+	
 	public static List<String> getFilesInPath(String path) {
 		File file = new File(path);
 		if (!file.isDirectory()) return null;
@@ -63,12 +65,30 @@ public class CommonUtils {
 			BufferedReader readBuf = new BufferedReader(ins);
 			String buf = null;
 			while ((buf = readBuf.readLine()) != null) {
+				//System.out.println(buf);
 				mp.put(buf.split("	")[0], Double.parseDouble(buf.split("	")[1]));
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		return mp;
+	}
+	
+	public static Map<String, Double> getInputFileMapAnd1(String filepath) {
+		Map<String, Double> mp = new HashMap<String, Double>();
+		try {
+			FileReader ins = new FileReader(filepath);
+			BufferedReader readBuf = new BufferedReader(ins);
+			String buf = null;
+			while ((buf = readBuf.readLine()) != null) {
+				mp.put(buf.split("	")[0], Double.parseDouble(buf.split("	")[1]));
+			}
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
 		return mp;
 	}
 	

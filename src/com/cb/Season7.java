@@ -1,5 +1,6 @@
 package com.cb;
 
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +59,8 @@ public class Season7 {
 					outList.add(strs[0] + "	" + value);
 				}
 				outList = Statistics.sortListAndNormal(outList, 1);
-				CommonUtils.outputFile(list.get(i).replaceAll("_ecc_sum.txt", "_"+pccval+"_party"+percent+"date"+(1-percent)+".txt").replaceAll("inpath", "result"), outList);
+				DecimalFormat df = new DecimalFormat("#0.0");
+				CommonUtils.outputFile(list.get(i).replaceAll("_ecc_sum.txt", "_"+df.format(pccval)+"_party"+df.format(percent)+"date"+df.format(1-percent)+".txt").replaceAll("inpath", "result"), outList);
 				i++;
 			}
 		}

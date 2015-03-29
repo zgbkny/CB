@@ -35,7 +35,7 @@ public class Statistics {
 			String strs[] = str.split("	");
 			double ret = Double.parseDouble(strs[index]);
 			ret = (ret - min) / (max - min);
-			map.put(strs[0] + "	" + strs[1],  ret);
+			map.put(strs[0],  ret);
 		}
 		
 		List<Map.Entry<String, Double>> infoIds =
@@ -136,7 +136,7 @@ public class Statistics {
 		int countAll = infoIds.size();
 		int essCount = 0, count = 0;
 		
-		for (int i = 0; i <= countAll * 1.0 * size / 100; i++) {
+		for (int i = 0; i < countAll * 1.0 * size / 100; i++) {
 			
 			
 			
@@ -157,7 +157,7 @@ public class Statistics {
 		
 	}
 	
-	public static void statByKeyValueEssInNum(String inpath, String outpath, int size) {
+	public static void statByKeyValueEssInNum(String inpath, String outpath, int size){
 		Set<String> essSet = EssUtils.getEssentialSet();
 		List<String> list = CommonUtils.getInputFile(inpath);
 		Map<String, Double> map = new HashMap<String, Double>();
@@ -173,7 +173,10 @@ public class Statistics {
 		    new ArrayList<Map.Entry<String, Double>>(map.entrySet());
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {   
 		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
-		        return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
+		       // return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
+		        if (o2.getValue() > o1.getValue()) {
+		        	return 1;
+		        } else return -1;
 		        //return (o1.getKey()).toString().compareTo(o2.getKey());
 		    }
 		});

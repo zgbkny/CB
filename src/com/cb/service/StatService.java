@@ -62,6 +62,7 @@ public class StatService {
 	}
 	
 	public void statFileByPercent(String inpath) {
+		System.out.println(inpath);
 		List<String> list = CommonUtils.getFilesInPath(inpath);
 		List<String> dataList = new ArrayList<String>();
 		for (String path : list) {
@@ -99,28 +100,30 @@ public class StatService {
 	
 	public void statFileByNum(String path) {
 		
-		List<String> list = CommonUtils.getFilesInPath(path);
-		List<String> dataList = new ArrayList<String>();
-		for (String inpath : list) {
-			System.out.println(inpath + "==================================");
-			
-			Statistics.statByKeyValueEssInNum(inpath, null, 100);
-			
-			Statistics.statByKeyValueEssInNum(inpath, null, 200);
-			
-			Statistics.statByKeyValueEssInNum(inpath, null, 300);
-			
-			Statistics.statByKeyValueEssInNum(inpath, null, 400);
-			Statistics.statByKeyValueEssInNum(inpath, null, 500);
-			
-			//Statistics.statByKeyValueEssInNum(inpath, null, 600);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 700);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 800);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 900);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 1000);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 1500);
-			//Statistics.statByKeyValueEssInNum(inpath, null, 2000);
-		}
+		String inpath = path;
+		
+		System.out.println(inpath + "==================================");
+		Statistics.statByKeyValueEssInNum(inpath, null, 51);
+		Statistics.statByKeyValueEssInNum(inpath, null, 255);
+		Statistics.statByKeyValueEssInNum(inpath, null, 510);
+		Statistics.statByKeyValueEssInNum(inpath, null, 764);
+		Statistics.statByKeyValueEssInNum(inpath, null, 100);
+		
+		Statistics.statByKeyValueEssInNum(inpath, null, 200);
+		
+		Statistics.statByKeyValueEssInNum(inpath, null, 300);
+		
+		Statistics.statByKeyValueEssInNum(inpath, null, 400);
+		Statistics.statByKeyValueEssInNum(inpath, null, 500);
+		
+		Statistics.statByKeyValueEssInNum(inpath, null, 600);
+		Statistics.statByKeyValueEssInNum(inpath, null, 700);
+		Statistics.statByKeyValueEssInNum(inpath, null, 800);
+		Statistics.statByKeyValueEssInNum(inpath, null, 900);
+		//Statistics.statByKeyValueEssInNum(inpath, null, 1000);
+		//Statistics.statByKeyValueEssInNum(inpath, null, 1500);
+		//Statistics.statByKeyValueEssInNum(inpath, null, 2000);
+		
 	}
 	
 public void statFileByNumByKey(String path, String originfile, int min, int max) {

@@ -11,7 +11,7 @@ import java.util.Vector;
 public class SoEcc {
 	public static void main(String[] args) {
 		SoEcc so = new SoEcc();
-		String path = "Nucleus_PPI.txt";
+		String path = "SC_net.txt";
 		Vector<String[]> edges = new Vector<String[]>();
 		String[] vertex = so.read(path, edges);
 		int[][] data = so.makeMatrix(edges, vertex);
