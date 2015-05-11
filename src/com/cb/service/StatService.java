@@ -103,10 +103,14 @@ public class StatService {
 		String inpath = path;
 		
 		System.out.println(inpath + "==================================");
-		Statistics.statByKeyValueEssInNum(inpath, null, 51);
-		Statistics.statByKeyValueEssInNum(inpath, null, 255);
-		Statistics.statByKeyValueEssInNum(inpath, null, 510);
-		Statistics.statByKeyValueEssInNum(inpath, null, 764);
+		Statistics.statByKeyValueEssInNum(inpath, null, 20);
+		Statistics.statByKeyValueEssInNum(inpath, null, 30);
+		/*		Statistics.statByKeyValueEssInNum(inpath, null, 247);
+		Statistics.statByKeyValueEssInNum(inpath, null, 495);
+		Statistics.statByKeyValueEssInNum(inpath, null, 743);
+		Statistics.statByKeyValueEssInNum(inpath, null, 990);
+		Statistics.statByKeyValueEssInNum(inpath, null, 1237);
+		//Statistics.statByKeyValueEssInNum(inpath, null, 1485);
 		Statistics.statByKeyValueEssInNum(inpath, null, 100);
 		
 		Statistics.statByKeyValueEssInNum(inpath, null, 200);
@@ -119,7 +123,7 @@ public class StatService {
 		Statistics.statByKeyValueEssInNum(inpath, null, 600);
 		Statistics.statByKeyValueEssInNum(inpath, null, 700);
 		Statistics.statByKeyValueEssInNum(inpath, null, 800);
-		Statistics.statByKeyValueEssInNum(inpath, null, 900);
+		Statistics.statByKeyValueEssInNum(inpath, null, 900);*/
 		//Statistics.statByKeyValueEssInNum(inpath, null, 1000);
 		//Statistics.statByKeyValueEssInNum(inpath, null, 1500);
 		//Statistics.statByKeyValueEssInNum(inpath, null, 2000);

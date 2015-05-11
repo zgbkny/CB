@@ -20,12 +20,49 @@ import com.cb.utils.EssUtils;
 
 public class Statistics {
 	
+	public static List<String> sortListAndNormalWithAll(List<String> list, int index) {
+		double min = Double.MAX_VALUE, max = Double.MIN_VALUE;
+		List<String> outList = new ArrayList<String>();
+		for (String str : list) {
+			String strs[] = str.split("	");
+			//System.out.println(strs[index]);
+			//System.out.println(str);
+			double ret = Double.parseDouble(strs[index]);
+			if (ret > max) max = ret;
+			if (ret < min) min = ret;
+		}
+		Map<String, Double> map = new HashMap<String, Double>();
+		for (String str : list) {
+			String strs[] = str.split("	");
+			double ret = Double.parseDouble(strs[index]);
+			ret = (ret - min) / (max - min);
+			map.put(strs[0],  ret);
+		}
+		
+		List<Map.Entry<String, Double>> infoIds =
+		    new ArrayList<Map.Entry<String, Double>>(map.entrySet());
+		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {   
+		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
+		        return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
+		        //return (o1.getKey()).toString().compareTo(o2.getKey());
+		    }
+		});
+
+		for(Map.Entry<String,Double> e : infoIds) {
+			outList.add(e.getKey() + "	" + e.getValue());
+		}
+	
+		return outList;
+	}
+	
 	
 	public static List<String> sortListAndNormal(List<String> list, int index) {
 		double min = Double.MAX_VALUE, max = Double.MIN_VALUE;
 		List<String> outList = new ArrayList<String>();
 		for (String str : list) {
 			String strs[] = str.split("	");
+			//System.out.println(strs[index]);
+			//System.out.println(str);
 			double ret = Double.parseDouble(strs[index]);
 			if (ret > max) max = ret;
 			if (ret < min) min = ret;
@@ -174,32 +211,31 @@ public class Statistics {
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {   
 		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
 		       // return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
-		        if (o2.getValue() > o1.getValue()) {
+		    	int flag = o2.getValue().compareTo(o1.getValue());
+		    	
+		        if (flag > 0) {
 		        	return 1;
-		        } else return -1;
+		        } else  return -1;
 		        //return (o1.getKey()).toString().compareTo(o2.getKey());
 		    }
 		});
+		
 		
 		int countAll = infoIds.size();
 		int essCount = 0, count = 0;
 		
 		for (int i = 0; i < size; i++) {
-			
-			
-			
 			Map.Entry<String,Double> e = infoIds.get(i);
+			
+			System.out.println(e.getKey() + " " + e.getValue() + " " + essSet.contains(e.getKey()));
+			
 			count++;
 			if (essSet.contains(e.getKey())) {
 				essCount++;
 			}
-			
-			
 		}
 		
 		System.out.println("top" + size + ":	" + essCount * 1.0 * 100/ count + "%	essCountInTop:	" + essCount + "	countInTop:	" + count);
-		
-		
 	}
 	
 	public static void statByKeyValueEssInNumByKey(String inpath, String outpath, int size, Map<String, Integer> dcMap, int min, int max) {

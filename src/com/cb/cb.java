@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.cb.service.StatService;
 import com.cb.strategy.Strategy;
+import com.cb.strategy.impl.DynamicNetworkStrategy;
 import com.cb.strategy.impl.HubEcc;
 import com.cb.strategy.impl.HubUc;
 import com.cb.utils.CBUtils;
@@ -119,8 +120,9 @@ public class cb {
 		//the10();
 		
 		//Strategy s = new HubEcc();
-		Strategy s = new HubUc();
-		s.action("H:\\金山网盘\\data\\CB\\inpath");
+		//Strategy s = new HubUc();
+		Strategy s = new DynamicNetworkStrategy("H:\\金山网盘\\data\\CB\\动态网络\\yeastsubcellular.txt");
+		s.action("H:\\金山网盘\\data\\CB\\动态网络\\12个时刻子网");
 		
 	}
 	
