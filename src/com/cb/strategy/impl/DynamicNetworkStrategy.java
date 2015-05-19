@@ -1,5 +1,6 @@
 package com.cb.strategy.impl;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,6 +23,7 @@ public class DynamicNetworkStrategy implements Strategy {
 		List<String> data = CommonUtils.getInputFile(filepath);
 		for (String item : data) {
 			String []strs = item.split("	");
+			if (strs.length == 1) continue;
 			String []items = strs[1].split(",");
 			if (mp.containsKey(strs[0])) {
 				for (String ss : items) {
@@ -67,12 +69,14 @@ public class DynamicNetworkStrategy implements Strategy {
 		List<String> data = CommonUtils.getInputFile(path);
 		List<String> list1, list2;
 		List<String> outList = new ArrayList<String>();
+		boolean flag = true;
 		for (String item : data) {
 			String items[] = item.split("	");
 			list1 = mp.get(items[0]);
 			list2 = mp.get(items[1]);
 			//System.out.println(item);
 			if ( list1 != null && list2 != null) {
+			    	flag = true;
 				for (String ss : list1) {
 					for (String sss : list2) {
 						if (ss.equals(sss)) {
@@ -84,13 +88,17 @@ public class DynamicNetworkStrategy implements Strategy {
 								xbqMap.get(ss).add(item);
 							}
 						}
+						
 					}
 				}
 			}
 		}
+		
 		for (String ss : xbqMap.keySet()) {
 			if (xbqMap.get(ss) != null) {
-				CommonUtils.outputFile(path.replace(".txt", "\\" + ss + "_out.txt"), xbqMap.get(ss));
+			    	File file = new File(path.replace(".txt", "")); 
+			    	file.mkdirs();
+				CommonUtils.outputFile(path.replace(".txt", "/" + ss + "_out.txt"), xbqMap.get(ss));
 			}
 			
 		}

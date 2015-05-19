@@ -200,7 +200,7 @@ public class Statistics {
 		Map<String, Double> map = new HashMap<String, Double>();
 		
 		for (String str : list) {
-			String []strs = str.split("	");
+			String []strs = str.split("  ");
 			Double d = Double.parseDouble(strs[1]);
 			map.put(strs[0], d);
 		}
@@ -210,12 +210,12 @@ public class Statistics {
 		    new ArrayList<Map.Entry<String, Double>>(map.entrySet());
 		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {   
 		    public int compare(Map.Entry<String, Double> o1, Map.Entry<String, Double> o2) {      
-		       // return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
-		    	int flag = o2.getValue().compareTo(o1.getValue());
+		        return (int)((o2.getValue()  - o1.getValue()) * 100000000); 
+		    	//int flag = o2.getValue().compareTo(o1.getValue());
 		    	
-		        if (flag > 0) {
+		/*        if (o2.getValue() > o1.getValue()) {
 		        	return 1;
-		        } else  return -1;
+		        } else  return -1;*/
 		        //return (o1.getKey()).toString().compareTo(o2.getKey());
 		    }
 		});
@@ -227,7 +227,7 @@ public class Statistics {
 		for (int i = 0; i < size; i++) {
 			Map.Entry<String,Double> e = infoIds.get(i);
 			
-			System.out.println(e.getKey() + " " + e.getValue() + " " + essSet.contains(e.getKey()));
+			//System.out.println(e.getKey() + " " + e.getValue() + " " + essSet.contains(e.getKey()));
 			
 			count++;
 			if (essSet.contains(e.getKey())) {
