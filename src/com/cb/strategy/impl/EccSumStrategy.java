@@ -37,6 +37,7 @@ public class EccSumStrategy implements Strategy {
         
         private Set<String> mergeData;
         private List<String> mergeList;
+        private String filename;
         
         public EccSumStrategy(String outpath, int actionType ) {
                 this.actionType = actionType;
@@ -46,6 +47,10 @@ public class EccSumStrategy implements Strategy {
                 this.outpath = outpath;
                 mergeData = new HashSet<String>();
                 mergeList = new ArrayList<String>();
+        }
+        
+        public void setMergeFileName(String filename) {
+            this.filename = filename;
         }
         
         @Override
@@ -145,6 +150,7 @@ public class EccSumStrategy implements Strategy {
                 case MERGE_FILES_IN_PATH:
                 case MERGE_SUBDIR_IN_PATH:
                         for (String ss : mergeData) mergeList.add(ss);
+                        CommonUtils.outputFile(filename, mergeList);
                         CommonUtils.outputFile(outpath, mergeList);
                         //graph = GraphUtils.getGraphFromList(mergeList);
                         graph = GraphUtils.getGraph(outpath);

@@ -119,6 +119,11 @@ public class StatService {
                 Statistics.statByKeyValueEssInNum(inpath, null, 300);
                 Statistics.statByKeyValueEssInNum(inpath, null, 400);
                 Statistics.statByKeyValueEssInNum(inpath, null, 500);
+                Statistics.statByKeyValueEssInNum(inpath, null, 600);
+                Statistics.statByKeyValueEssInNum(inpath, null, 700);
+                Statistics.statByKeyValueEssInNum(inpath, null, 800);
+                Statistics.statByKeyValueEssInNum(inpath, null, 900);
+                Statistics.statByKeyValueEssInNum(inpath, null, 1000);
                 /*
                  * Statistics.statByKeyValueEssInNum(inpath, null, 247);
                  * Statistics.statByKeyValueEssInNum(inpath, null, 495);

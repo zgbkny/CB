@@ -34,12 +34,17 @@ public class DcStrategy implements Strategy {
         private Set<String> mergeData = new HashSet<String>();
         private List<String> mergeList = new ArrayList<String>();
         private int actionType;
+        private String filename;
         
         public DcStrategy(String outpath, int actionType) {
                 dcMap = new HashMap<String, Integer>();
                 dc = new DC();
                 this.outpath = outpath;
                 this.actionType = actionType;
+        }
+        
+        public void setMergeFileName(String filename) {
+            this.filename = filename;
         }
         
         @Override
@@ -137,6 +142,7 @@ public class DcStrategy implements Strategy {
                 case MERGE_FILES_IN_PATH:
                 case MERGE_SUBDIR_IN_PATH:
                         for (String ss : mergeData)  mergeList.add(ss);
+                        CommonUtils.outputFile(filename, mergeList);
                         dcMap =  dc.calDC(mergeList);
                         break;
                 default:

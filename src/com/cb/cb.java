@@ -9,11 +9,13 @@ import java.util.List;
 
 import com.cb.service.StatService;
 import com.cb.strategy.Strategy;
+import com.cb.strategy.impl.CentralityStrategy;
 import com.cb.strategy.impl.DcStrategy;
 import com.cb.strategy.impl.DynamicNetworkStrategy;
 import com.cb.strategy.impl.EccSumStrategy;
 import com.cb.strategy.impl.HubEcc;
 import com.cb.strategy.impl.HubUc;
+import com.cb.strategy.impl.StatStrategy;
 import com.cb.utils.CBUtils;
 import com.cb.utils.DCUtils;
 import com.cb.utils.PCCUtils;
@@ -112,35 +114,46 @@ public class cb {
         // TODO Auto-generated method stub
         // Strategy s = new HubEcc();
         // Strategy s = new HubUc();
+        
+        /*Strategy cs = new StatStrategy();
+        cs.action("/home/ww/cache/cb/PeC结果");*/
+    	
+    	/*DynamicNetworkStrategy dns = new DynamicNetworkStrategy("/home/ww/cache/20150604实验/20150604实验/yeastsubcellular.txt");
+    	dns.action("/home/ww/cache/20150604实验/20150604实验/xqh_subnet");*/
+        
         Strategy s = new DcStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_subdir_dc.txt",
+                "/home/ww/cache/生物/pxq_snbnet_out_subdir_dc.txt",
                 DcStrategy.SUBDIR_IN_PATH);
-        s.action("/home/ww/cache/生物/xqh_subnet");
+        s.action("/home/ww/cache/生物/pxq_snbnet");
 
-        Strategy s1 = new DcStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_merge_subdir_dc.txt",
+        DcStrategy s1 = new DcStrategy(
+                "/home/ww/cache/生物/pxq_snbnet_out_merge_subdir_dc.txt",
                 DcStrategy.MERGE_SUBDIR_IN_PATH);
-        s1.action("/home/ww/cache/生物/xqh_subnet");
+        s1.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_subdir.txt");
+        s1.action("/home/ww/cache/生物/pxq_snbnet");
 
-        Strategy s2 = new DcStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_merge_files_dc.txt",
+        DcStrategy s2 = new DcStrategy(
+                "/home/ww/cache/生物/pxq_snbnet_out_merge_files_dc.txt",
                 DcStrategy.MERGE_FILES_IN_PATH);
-        s2.action("/home/ww/cache/生物/xqh_subnet");
+        s2.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_files.txt");
+        s2.action("/home/ww/cache/生物/pxq_snbnet");
 
         Strategy s3 = new EccSumStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_subdir_ecc.txt",
+                "/home/ww/cache/生物/pxq_snbnet_out_subdir_ecc.txt",
                 DcStrategy.SUBDIR_IN_PATH);
-        s3.action("/home/ww/cache/生物/xqh_subnet");
+        s3.action("/home/ww/cache/生物/pxq_snbnet");
 
-        Strategy s4 = new EccSumStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_merge_subdir_ecc.txt",
+        EccSumStrategy s4 = new EccSumStrategy(
+                "/home/ww/cache/生物/pxq_snbnet_out_merge_subdir_ecc.txt",
                 DcStrategy.MERGE_SUBDIR_IN_PATH);
-        s4.action("/home/ww/cache/生物/xqh_subnet");
+        s4.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_subdir.txt");
+        s4.action("/home/ww/cache/生物/pxq_snbnet");
 
-        Strategy s5 = new EccSumStrategy(
-                "/home/ww/cache/生物/xqh_subnet_out_merge_files_ecc.txt",
+        EccSumStrategy s5 = new EccSumStrategy(
+                "/home/ww/cache/生物/pxq_snbnet_out_merge_files_ecc.txt",
                 DcStrategy.MERGE_FILES_IN_PATH);
-        s5.action("/home/ww/cache/生物/xqh_subnet");
+        s5.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_files.txt");
+        s5.action("/home/ww/cache/生物/pxq_snbnet");
     }
 
 }

@@ -9,13 +9,17 @@ import java.util.Set;
 
 import com.cb.strategy.Strategy;
 import com.cb.utils.CommonUtils;
-
+/***
+ * @author ww
+ * @function 根据网络中每条边是否对应相同细胞器来分组，将网络分到不同的细胞器中
+ */
 public class DynamicNetworkStrategy implements Strategy {
 
 	private Map<String, List<String>> mp;
+	// 细胞器map
 	private Map<String, List<String>> xbqMap;
 
-	
+	// 蛋白对应的细胞器文件
 	public DynamicNetworkStrategy(String filepath) {
 		// TODO Auto-generated constructor stub
 		mp = new HashMap<String, List<String>>();
