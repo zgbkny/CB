@@ -17,6 +17,7 @@ import com.cb.strategy.impl.HubEcc;
 import com.cb.strategy.impl.HubUc;
 import com.cb.strategy.impl.StatStrategy;
 import com.cb.utils.CBUtils;
+import com.cb.utils.CommonUtils;
 import com.cb.utils.DCUtils;
 import com.cb.utils.PCCUtils;
 
@@ -118,42 +119,57 @@ public class cb {
         /*Strategy cs = new StatStrategy();
         cs.action("/home/ww/cache/cb/PeC结果");*/
     	
-    	/*DynamicNetworkStrategy dns = new DynamicNetworkStrategy("/home/ww/cache/20150604实验/20150604实验/yeastsubcellular.txt");
-    	dns.action("/home/ww/cache/20150604实验/20150604实验/xqh_subnet");*/
+    	/*List<String> list = CommonUtils.getFilesInPath("/home/ww/cache/cb/20150607/data/");
+    	for (String str : list) {
+    		EccSumStrategy ess = new EccSumStrategy(
+        			str.replaceAll(".txt", "_eccsum.txt"),
+                    EccSumStrategy.FILE_PATH);
+        	ess.action(str);
+    	}*/
+    	CentralityStrategy cs = new CentralityStrategy();
+    	cs.action("/home/ww/cache/cb/20150609-1");
+    	
+    	
+    	/*
+    	DynamicNetworkStrategy dns = new DynamicNetworkStrategy("/home/ww/cache/cb/20150609", true);
+    	dns.action("/home/ww/cache/cb/20150609/pxq-subnet");*/
         
-        Strategy s = new DcStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_subdir_dc.txt",
+    	
+        /*Strategy s = new DcStrategy(
+                "/home/ww/cache/cb/pxq-subnet_out_subdir_dc.txt",
                 DcStrategy.SUBDIR_IN_PATH);
-        s.action("/home/ww/cache/生物/pxq_snbnet");
+        s.action("/home/ww/cache/cb/pxq-subnet");*/
 
-        DcStrategy s1 = new DcStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_merge_subdir_dc.txt",
+        
+        /*Strategy s3 = new EccSumStrategy(
+                "/home/ww/cache/cb/pxq-subnet_out_subdir_ecc.txt",
+                DcStrategy.SUBDIR_IN_PATH);
+        s3.action("/home/ww/cache/cb/pxq-subnet");*/
+    	/*
+    	DcStrategy s1 = new DcStrategy(
+                "/home/ww/cache/cb/20150609/pxq-subnet_out_merge_subdir_dc.txt",
                 DcStrategy.MERGE_SUBDIR_IN_PATH);
-        s1.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_subdir.txt");
-        s1.action("/home/ww/cache/生物/pxq_snbnet");
+        s1.setMergeFileName("/home/ww/cache/cb/20150609/pxq-subnet_out_merge_subdir.txt");
+        s1.action("/home/ww/cache/cb/20150609/pxq-subnet");
 
         DcStrategy s2 = new DcStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_merge_files_dc.txt",
+                "/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files_dc.txt",
                 DcStrategy.MERGE_FILES_IN_PATH);
-        s2.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_files.txt");
-        s2.action("/home/ww/cache/生物/pxq_snbnet");
+        s2.setMergeFileName("/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files.txt");
+        s2.action("/home/ww/cache/cb/20150609/pxq-subnet");*/
 
-        Strategy s3 = new EccSumStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_subdir_ecc.txt",
-                DcStrategy.SUBDIR_IN_PATH);
-        s3.action("/home/ww/cache/生物/pxq_snbnet");
-
+    	/*
         EccSumStrategy s4 = new EccSumStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_merge_subdir_ecc.txt",
+                "/home/ww/cache/cb/20150609/pxq-subnet_out_merge_subdir_ecc.txt",
                 DcStrategy.MERGE_SUBDIR_IN_PATH);
-        s4.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_subdir.txt");
-        s4.action("/home/ww/cache/生物/pxq_snbnet");
+        s4.setMergeFileName("/home/ww/cache/cb/20150609/pxq-subnet_out_merge_subdir.txt");
+        s4.action("/home/ww/cache/cb/20150609/pxq-subnet");
 
         EccSumStrategy s5 = new EccSumStrategy(
-                "/home/ww/cache/生物/pxq_snbnet_out_merge_files_ecc.txt",
+                "/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files_ecc.txt",
                 DcStrategy.MERGE_FILES_IN_PATH);
-        s5.setMergeFileName("/home/ww/cache/生物/pxq_snbnet_out_merge_files.txt");
-        s5.action("/home/ww/cache/生物/pxq_snbnet");
+        s5.setMergeFileName("/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files.txt");
+        s5.action("/home/ww/cache/cb/20150609/pxq-subnet");*/
     }
 
 }

@@ -209,7 +209,7 @@ public class Statistics {
 		int k = 0;
 		for (String str : list) {
 
-			String[] strs = str.split("	");
+			String[] strs = str.split("  ");
 			Double d = Double.parseDouble(strs[1]);
 			map.put(strs[0], d);
 		}

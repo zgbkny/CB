@@ -9,15 +9,58 @@ import java.util.Set;
 
 import com.cb.strategy.Strategy;
 import com.cb.utils.CommonUtils;
+
 /***
  * @author ww
  * @function 根据网络中每条边是否对应相同细胞器来分组，将网络分到不同的细胞器中
  */
 public class DynamicNetworkStrategy implements Strategy {
-
+	// 蛋白对应的细胞器map
 	private Map<String, List<String>> mp;
 	// 细胞器map
 	private Map<String, List<String>> xbqMap;
+
+	// 蛋白对应的细胞器文件夹
+	public DynamicNetworkStrategy(String path, boolean dirFlag) {
+		mp = new HashMap<String, List<String>>();
+		xbqMap = new HashMap<String, List<String>>();
+		List<String> files = null;
+		if (dirFlag) {
+			files = CommonUtils.getFilesInPath(path);
+		} else {
+			files = new ArrayList<String>();
+			files.add(path);
+		}
+		for (String filepath : files) {
+			List<String> data = CommonUtils.getInputFile(filepath);
+			for (String item : data) {
+				String[] strs = item.split("	");
+				if (strs.length == 1)
+					continue;
+				String[] items = strs[1].split(",");
+				if (mp.containsKey(strs[0])) {
+					for (String ss : items) {
+						mp.get(strs[0]).add(ss);
+					}
+				} else {
+					List<String> list = new ArrayList<String>();
+					for (String ss : items) {
+						list.add(ss);
+					}
+					mp.put(strs[0], list);
+				}
+
+				for (String ss : items) {
+					if (ss.indexOf("/") != -1) {
+						System.out.println(ss);
+					}
+					if (!xbqMap.containsKey(ss)) {
+						xbqMap.put(ss, null);
+					}
+				}
+			}
+		}
+	}
 
 	// 蛋白对应的细胞器文件
 	public DynamicNetworkStrategy(String filepath) {
@@ -26,9 +69,10 @@ public class DynamicNetworkStrategy implements Strategy {
 		xbqMap = new HashMap<String, List<String>>();
 		List<String> data = CommonUtils.getInputFile(filepath);
 		for (String item : data) {
-			String []strs = item.split("	");
-			if (strs.length == 1) continue;
-			String []items = strs[1].split(",");
+			String[] strs = item.split("	");
+			if (strs.length == 1)
+				continue;
+			String[] items = strs[1].split(",");
 			if (mp.containsKey(strs[0])) {
 				for (String ss : items) {
 					mp.get(strs[0]).add(ss);
@@ -40,7 +84,7 @@ public class DynamicNetworkStrategy implements Strategy {
 				}
 				mp.put(strs[0], list);
 			}
-			
+
 			for (String ss : items) {
 				if (!xbqMap.containsKey(ss)) {
 					xbqMap.put(ss, null);
@@ -48,11 +92,12 @@ public class DynamicNetworkStrategy implements Strategy {
 			}
 		}
 	}
+
 	@Override
 	public void action(String dirpath) {
 		// TODO Auto-generated method stub
 		List<String> list = CommonUtils.getFilesInPath(dirpath);
-		
+
 		for (String path : list) {
 			pre(path);
 			core(path);
@@ -64,9 +109,9 @@ public class DynamicNetworkStrategy implements Strategy {
 	@Override
 	public void pre(String path) {
 		// TODO Auto-generated method stub
-		
+
 	}
-	
+
 	@Override
 	public void core(String path) {
 		// TODO Auto-generated method stub
@@ -78,9 +123,9 @@ public class DynamicNetworkStrategy implements Strategy {
 			String items[] = item.split("	");
 			list1 = mp.get(items[0]);
 			list2 = mp.get(items[1]);
-			//System.out.println(item);
-			if ( list1 != null && list2 != null) {
-			    	flag = true;
+			// System.out.println(item);
+			if (list1 != null && list2 != null) {
+				flag = true;
 				for (String ss : list1) {
 					for (String sss : list2) {
 						if (ss.equals(sss)) {
@@ -92,21 +137,23 @@ public class DynamicNetworkStrategy implements Strategy {
 								xbqMap.get(ss).add(item);
 							}
 						}
-						
+
 					}
 				}
 			}
 		}
-		
+
 		for (String ss : xbqMap.keySet()) {
 			if (xbqMap.get(ss) != null) {
-			    	File file = new File(path.replace(".txt", "")); 
-			    	file.mkdirs();
-				CommonUtils.outputFile(path.replace(".txt", "/" + ss + "_out.txt"), xbqMap.get(ss));
+				File file = new File(path.replace(".txt", ""));
+				file.mkdirs();
+				CommonUtils.outputFile(
+				        path.replace(".txt", "/" + ss + "_out.txt"),
+				        xbqMap.get(ss));
 			}
-			
+
 		}
-		
+
 	}
 
 	@Override
@@ -117,7 +164,7 @@ public class DynamicNetworkStrategy implements Strategy {
 		for (String ss : set) {
 			xbqMap.put(ss, null);
 		}
-	} 
+	}
 
 	@Override
 	public void stat(String path) {
