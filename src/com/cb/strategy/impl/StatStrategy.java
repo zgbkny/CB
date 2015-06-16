@@ -24,7 +24,7 @@ public class StatStrategy implements Strategy {
     @Override
     public void pre(String path) {
         // TODO Auto-generated method stub
-    	List<String> list = CommonUtils.getInputFile(path);
+    	/*List<String> list = CommonUtils.getInputFile(path);
     	List<String> outList = new ArrayList<String>();
     	for (String item : list) {
     		String ss[] = item.split("	");
@@ -34,7 +34,7 @@ public class StatStrategy implements Strategy {
     		}
     		outList.add(ss[0] + "	" + value);
     	}
-    	CommonUtils.outputFile(path, outList);
+    	CommonUtils.outputFile(path, outList);*/
     }
 
     @Override

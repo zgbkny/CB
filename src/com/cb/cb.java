@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import com.cb.service.StatService;
 import com.cb.strategy.Strategy;
@@ -13,109 +15,85 @@ import com.cb.strategy.impl.CentralityStrategy;
 import com.cb.strategy.impl.DcStrategy;
 import com.cb.strategy.impl.DynamicNetworkStrategy;
 import com.cb.strategy.impl.EccSumStrategy;
+import com.cb.strategy.impl.EssSetStatStrategy;
+import com.cb.strategy.impl.GenStatStrategy;
+import com.cb.strategy.impl.GeneExpStrategy;
 import com.cb.strategy.impl.HubEcc;
 import com.cb.strategy.impl.HubUc;
 import com.cb.strategy.impl.StatStrategy;
 import com.cb.utils.CBUtils;
 import com.cb.utils.CommonUtils;
 import com.cb.utils.DCUtils;
+import com.cb.utils.EssUtils;
 import com.cb.utils.PCCUtils;
 
 public class cb {
-
-    public static void calEcc() {
-        DCUtils dcUtils = new DCUtils();
-        // dcUtils.calDc("Y2k.txt", "Essential.txt");
-
-        ECCUtils eccUtils = new ECCUtils();
-        eccUtils.calEcc("DIP20101010.txt");
-    }
-
-    public static void calGo() {
-        GOUtils goUtils = new GOUtils();
-        List<String> list = new ArrayList<String>();
-        list.add("GO_Function_annotation.txt");
-        list.add("GO_Process_annotation.txt");
-        list.add("GO_Component_annotation.txt");
-        // goUtils.calProbability(list);
-        // goUtils.calSim("go_Probability.txt", list);
-        // goUtils.calFS("DIP20101010.txt", "go_sim.txt", list);
-        goUtils.calCvw("go_FS_DIP20101010.txt");
-        goUtils.normalize("cvw_go_FS_DIP20101010.txt");
-    }
-
-    public static void calPcc() {
-        PCCUtils pccUtils = new PCCUtils();
-        pccUtils.calPcc("SC_net.txt", null, "result36.txt");
-    }
-
-    public static void cl() {
-        CBUtils cb = new CBUtils();
-        cb.classify("go_FSs.txt", "Essential.txt");
-        cb.statistic("c3_not_go_FSs.txt", 10);
-        cb.statistic("c2_notall_go_FSs.txt", 10);
-        cb.statistic("c1_all_go_FSs.txt", 10);
-    }
-
-    /**
-     * target: 计算数据集的ecc、 bc、pc等， 然后不用根据一个边包含几个关键蛋白分三类，直接根据计算的结果进行统计
-     */
-    public static void the3() {
-        Season3 s3 = new Season3();
-
-    }
-
-    public static void the4() {
-        Season4 season = new Season4();
-        season.core();
-    }
-
-    public static void the5() {
-        Season5 season = new Season5();
-        season.core2();
-    }
-
-    public static void the6() {
-        Season6 season = new Season6();
-        season.core();
-    }
-
-    public static void the7() {
-        Season7 season = new Season7();
-        // season.checkHub();
-        /*
-         * double i = 0.1, j = 0.1; for ( ; i < 0.99; i += 0.1) {
-         * 
-         * for (j = 0.1 ; j <= 0.5; j += 0.1 ) {
-         * season.calNewValueByPartyDateHub(0.5, i, j); } }
-         */
-
-        new StatService().statFileByPercent("H:\\金山网盘\\data\\CB\\inpath");
-    }
-
-    public static void the8() {
-        Season8.core();
-    }
-
-    public static void the9() {
-        Season9.pre();
-        // Season9.eccSum();
-        Season9.core();
-        Season9.stat();
-    }
-
-    public static void the10() {
-        Season10.core();
-    }
-
+	public static void find() {
+		Map<String, Double> map1 = CommonUtils.getInputFileMapKey("/home/ww/cache/cb/20150614-4/Nucleus_PPI_dc.txt");
+		Map<String, Double> map2 = CommonUtils.getInputFileMapKey("/home/ww/cache/cb/20150614-4/TS-PIN_bc.txt");
+		int size = map1.size();
+		Set<String> set = map2.keySet();
+		Set<String> essSet = EssUtils.getEssentialSet();
+		Object []os = set.toArray();
+		for (int i = 0; i < set.size(); i++) {
+			map2.put((String)os[i], map2.get((String)os[i]) * size / map2.size());
+		}
+		String small = null, big = null; 
+		int max = Integer.MIN_VALUE, min = Integer.MAX_VALUE;
+		for (String item : map1.keySet()) {
+			if (map2.containsKey(item) && essSet.contains(item)) {
+				int temp = (int) (map2.get(item) - map1.get(item));
+				
+				if (max < temp) {
+					max = temp;
+					big = item;
+				} 
+				if (min > temp) {
+					min = temp;
+					small = item;
+				}
+			}
+			
+		}
+		
+		System.out.println("big:" + big);
+		System.out.println("small:" + small);
+	}
+	
     /**
      * @param args
      */
     public static void main(String[] args) {
+    	EssSetStatStrategy esst = new EssSetStatStrategy();
+    	esst.setSize(100);
+    	esst.action("/home/ww/cache/cb/20150615/计算S1，S2，S3");
+    	
+    	//GenStatStrategy gss = new GenStatStrategy();
+    	//gss.action("/home/ww/cache/cb/20150614-3/画折刀图需要的文件");
+    	/*EccSumStrategy ess = new EccSumStrategy(
+                "/home/ww/cache/cb/20150613-1/Nucleus_PPI_tc_pin_ecc_sum.txt",
+                EccSumStrategy.FILE_PATH);
+        ess.action("/home/ww/cache/cb/20150613-1/Nucleus_PPI_tc_pin.txt");*/
+    	
+    	
+    	//CentralityStrategy cs = new CentralityStrategy();
+    	//cs.action("/home/ww/cache/cb/20150614-4");
+    	
+    	
+    	
+    	//Strategy cs = new StatStrategy();
+        //cs.action("/home/ww/cache/cb/20150614-2/所有网络的NC输出");
+    	
+    	/////////////////////////////////////////////////////////////////////////////////////////
         // TODO Auto-generated method stub
         // Strategy s = new HubEcc();
         // Strategy s = new HubUc();
+    	//GeneExpStrategy ges = new GeneExpStrategy("/home/ww/cache/cb/20150613-1/out.txt");
+    	//ges.action("/home/ww/cache/cb/20150613-1/Nucleus_PPI.txt");
         
+    	
+    	
+    	
         /*Strategy cs = new StatStrategy();
         cs.action("/home/ww/cache/cb/PeC结果");*/
     	
@@ -126,10 +104,18 @@ public class cb {
                     EccSumStrategy.FILE_PATH);
         	ess.action(str);
     	}*/
-    	CentralityStrategy cs = new CentralityStrategy();
-    	cs.action("/home/ww/cache/cb/20150609-1");
-    	
-    	
+    	//
+    	/*
+    	EccSumStrategy ess = new EccSumStrategy(
+                "/home/ww/cache/cb/20150613/NF-PIN（肖强华）_ecc_sum.txt",
+                EccSumStrategy.FILE_PATH);
+        ess.action("/home/ww/cache/cb/20150613/NF-PIN（肖强华）.txt");
+        
+        EccSumStrategy ess2 = new EccSumStrategy(
+                "/home/ww/cache/cb/20150613/TS-PIN（陈骁培）_ecc_sum.txt",
+                EccSumStrategy.FILE_PATH);
+        ess2.action("/home/ww/cache/cb/20150613/TS-PIN（陈骁培）.txt");
+    	*/
     	/*
     	DynamicNetworkStrategy dns = new DynamicNetworkStrategy("/home/ww/cache/cb/20150609", true);
     	dns.action("/home/ww/cache/cb/20150609/pxq-subnet");*/

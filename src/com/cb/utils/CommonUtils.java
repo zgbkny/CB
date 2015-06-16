@@ -54,6 +54,30 @@ public class CommonUtils {
      * @param path
      * @return
      */
+    public static List<String> getSubDirInPath(String path) {
+        File file = new File(path);
+        if (!file.isDirectory())
+            return null;
+        List<String> outList = new ArrayList<String>();
+        File[] t = file.listFiles();
+        System.out.println(t);
+        for (int i = 0; i < t.length; i++) {
+            if (t[i].isDirectory()) {
+                // if (t[i].getName().length() < 30) {
+                outList.add(t[i].getAbsolutePath());
+                System.out.println(t[i].getAbsolutePath());
+                // }
+            }
+        }
+        return outList;
+    }
+    
+    /***
+     * get all files path name in the path (one level)
+     * 
+     * @param path
+     * @return
+     */
     public static List<String> getFilesInPath(String path) {
         File file = new File(path);
         if (!file.isDirectory())
@@ -98,6 +122,44 @@ public class CommonUtils {
             while ((buf = readBuf.readLine()) != null) {
                 // System.out.println(buf);
                 mp.put(buf.split("	")[0], Double.parseDouble(buf.split("	")[1]));
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return mp;
+    }
+    
+    public static Map<String, Integer> getInputFileMapWithIndex(String filepath) {
+        Map<String, Integer> mp = new HashMap<String, Integer>();
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            int i = 0;
+            while ((buf = readBuf.readLine()) != null) {
+                // System.out.println(buf);
+                mp.put(buf.split("	")[0], i);
+                i++;
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return mp;
+    }
+    
+    public static Map<String, Double> getInputFileMapKey(String filepath) {
+        Map<String, Double> mp = new HashMap<String, Double>();
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            int i = 0;
+            while ((buf = readBuf.readLine()) != null) {
+                // System.out.println(buf);
+                mp.put(buf.split("	")[0], i * 1.0);
+                i++;
             }
         } catch (IOException e) {
             // TODO Auto-generated catch block
@@ -168,6 +230,28 @@ public class CommonUtils {
             String buf = null;
             while ((buf = readBuf.readLine()) != null) {
                 list.add(buf);
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // System.out.println("get inputFile done....");
+        return list;
+    }
+    
+    public static List<String> getInputFileJustKey(String filepath) {
+        List<String> list = new ArrayList<String>();
+
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            while ((buf = readBuf.readLine()) != null) {
+            	String strs[] = buf.split("	");
+            	if (strs.length > 1) {
+            		list.add(strs[0]);
+            	}
             }
 
         } catch (IOException e) {
