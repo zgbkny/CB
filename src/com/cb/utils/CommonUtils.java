@@ -84,12 +84,12 @@ public class CommonUtils {
             return null;
         List<String> outList = new ArrayList<String>();
         File[] t = file.listFiles();
-        System.out.println(t);
+        //System.out.println(t);
         for (int i = 0; i < t.length; i++) {
             if (!t[i].isDirectory()) {
                 // if (t[i].getName().length() < 30) {
                 outList.add(t[i].getAbsolutePath());
-                System.out.println(t[i].getAbsolutePath());
+                //System.out.println(t[i].getAbsolutePath());
                 // }
             }
         }

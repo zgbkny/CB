@@ -12,10 +12,12 @@ import java.util.Set;
 import com.cb.service.StatService;
 import com.cb.strategy.Strategy;
 import com.cb.strategy.impl.CentralityStrategy;
+import com.cb.strategy.impl.DCTableStrategy;
 import com.cb.strategy.impl.DcStrategy;
 import com.cb.strategy.impl.DynamicNetworkStrategy;
 import com.cb.strategy.impl.EccSumStrategy;
 import com.cb.strategy.impl.EssSetStatStrategy;
+import com.cb.strategy.impl.GenBrokeLineStrategy;
 import com.cb.strategy.impl.GenStatStrategy;
 import com.cb.strategy.impl.GeneExpStrategy;
 import com.cb.strategy.impl.HubEcc;
@@ -64,9 +66,8 @@ public class cb {
      * @param args
      */
     public static void main(String[] args) {
-    	EssSetStatStrategy esst = new EssSetStatStrategy();
-    	esst.setSize(100);
-    	esst.action("/home/ww/cache/cb/20150615/计算S1，S2，S3");
+    	DCTableStrategy esst = new DCTableStrategy();
+    	esst.action("/home/ww/cache/cb/20150618/DC");
     	
     	//GenStatStrategy gss = new GenStatStrategy();
     	//gss.action("/home/ww/cache/cb/20150614-3/画折刀图需要的文件");

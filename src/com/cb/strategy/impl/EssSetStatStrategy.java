@@ -40,16 +40,29 @@ public class EssSetStatStrategy implements Strategy {
 		essSet = EssUtils.getEssentialSet();
 		for (String subDir : subDirPaths) {
 			List<String> filepaths = CommonUtils.getFilesInPath(subDir);
+			
+			
+			
 			if (filepaths.size() == 3) {
-				System.out.println("s1:" + filepaths.get(0));
-				System.out.println("s2:" + filepaths.get(1));
-				System.out.println("s3:" + filepaths.get(2));
-				s1Map = CommonUtils.getInputFileMapWithIndex(filepaths.get(0));
-				s1List = CommonUtils.getInputFileJustKey(filepaths.get(0));
-				s2Map = CommonUtils.getInputFileMapWithIndex(filepaths.get(1));
-				s2List = CommonUtils.getInputFileJustKey(filepaths.get(1));
-				s3Map = CommonUtils.getInputFileMapWithIndex(filepaths.get(2));
-				s3List = CommonUtils.getInputFileJustKey(filepaths.get(2));
+				for (String filepath : filepaths) {
+					if (filepath.indexOf("/TS-PIN") != -1) {
+						System.out.println("s1:" + filepath);
+						s1Map = CommonUtils.getInputFileMapWithIndex(filepath);
+						s1List = CommonUtils.getInputFileJustKey(filepath);
+					}
+					
+					if (filepath.indexOf("/NF-APIN") != -1) {
+						System.out.println("s2-1:" + filepath);
+						s2Map = CommonUtils.getInputFileMapWithIndex(filepath);
+						s2List = CommonUtils.getInputFileJustKey(filepath);
+					}
+					
+					if (filepath.indexOf("/S-PIN") != -1) {
+						System.out.println("s2-2:" + filepath);
+						s3Map = CommonUtils.getInputFileMapWithIndex(filepath);
+						s3List = CommonUtils.getInputFileJustKey(filepath);
+					}
+				}
 			}
 			pre(null);
 			core(null);
@@ -74,8 +87,8 @@ public class EssSetStatStrategy implements Strategy {
 			}
  		}
 		System.out.println("s1 ess count:" + count1);
-		System.out.println("s2 ess count:" + count2);
-		System.out.println("s3 ess count:" + count3);
+		System.out.println("s2-1 ess count:" + count2);
+		System.out.println("s2-2 ess count:" + count3);
 	}
 
 	public int getS1AndS2(List<String> s1List, Map<String, Integer> s2Map) {
@@ -111,11 +124,13 @@ public class EssSetStatStrategy implements Strategy {
 	@Override
 	public void core(String path) {
 		// TODO Auto-generated method stub
-		System.out.println("s1 & s3:" + getS1AndS2(s1List, s3Map));
-		System.out.println("s2 & s3:" + getS1AndS2(s2List, s3Map));
+		System.out.println("s1 & s2-1:" + getS1AndS2(s1List, s2Map));
+		System.out.println("s1 & s2-2:" + getS1AndS2(s1List, s3Map));
 		
-		System.out.println("s3 - s1:" + getS1MinusS2(s3List, s1Map));
-		System.out.println("s3 - s2:" + getS1MinusS2(s3List, s2Map));
+		System.out.println("s1 - s2-1:" + getS1MinusS2(s1List, s2Map));
+		System.out.println("s2-1 - s1:" + getS1MinusS2(s2List, s1Map));
+		System.out.println("s1 - s2-2:" + getS1MinusS2(s1List, s3Map));
+		System.out.println("s2-2 - s1:" + getS1MinusS2(s3List, s1Map));
 	}
 
 	@Override
