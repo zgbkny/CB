@@ -59,9 +59,9 @@ public class DCTableStrategy implements Strategy {
 		// TODO Auto-generated method stub
 		List<String> outList = new ArrayList<String>();
 		Set<String> essSet = EssUtils.getEssentialSet();
-		for (int i = 0; i < TSlist.size(); i++) {
-			if (NFMap.containsKey(TSlist.get(i)) && SMap.containsKey(TSlist.get(i))) {
-				outList.add( TSlist.get(i) + "	" + essSet.contains(TSlist.get(i)) + "	" + TSMap.get(TSlist.get(i)) + "	" + NFMap.get(TSlist.get(i)) + "	" + SMap.get(TSlist.get(i)));
+		for (int i = 0; i < Slist.size(); i++) {
+			if (NFMap.containsKey(Slist.get(i)) && TSMap.containsKey(Slist.get(i))) {
+				outList.add( Slist.get(i) + "	" + essSet.contains(Slist.get(i)) + "	" + SMap.get(Slist.get(i)) + "	" + NFMap.get(Slist.get(i)) + "	" + TSMap.get(Slist.get(i)));
 			}
 		}
 		CommonUtils.outputFile(path + "/result.txt", outList);

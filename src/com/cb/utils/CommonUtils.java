@@ -130,6 +130,23 @@ public class CommonUtils {
         return mp;
     }
     
+    public static Map<String, Integer> getInputFileMapByInteger(String filepath) {
+        Map<String, Integer> mp = new HashMap<String, Integer>();
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            while ((buf = readBuf.readLine()) != null) {
+                // System.out.println(buf);
+                mp.put(buf.split("  ")[0], Integer.parseInt(buf.split("  ")[1]));
+            }
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        return mp;
+    }
+    
     public static Map<String, Integer> getInputFileMapWithIndex(String filepath) {
         Map<String, Integer> mp = new HashMap<String, Integer>();
         try {
@@ -248,7 +265,7 @@ public class CommonUtils {
             BufferedReader readBuf = new BufferedReader(ins);
             String buf = null;
             while ((buf = readBuf.readLine()) != null) {
-            	String strs[] = buf.split("	");
+            	String strs[] = buf.split("  ");
             	if (strs.length > 1) {
             		list.add(strs[0]);
             	}

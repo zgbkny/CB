@@ -35,19 +35,19 @@ public class DynamicNetworkStrategy implements Strategy {
 			List<String> data = CommonUtils.getInputFile(filepath);
 			for (String item : data) {
 				String[] strs = item.split("	");
-				if (strs.length == 1)
+				if (strs.length == 2)
 					continue;
-				String[] items = strs[1].split(",");
-				if (mp.containsKey(strs[0])) {
+				String[] items = strs[2].split(", ");
+				if (mp.containsKey(strs[1])) {
 					for (String ss : items) {
-						mp.get(strs[0]).add(ss);
+						mp.get(strs[1]).add(ss);
 					}
 				} else {
 					List<String> list = new ArrayList<String>();
 					for (String ss : items) {
 						list.add(ss);
 					}
-					mp.put(strs[0], list);
+					mp.put(strs[1], list);
 				}
 
 				for (String ss : items) {
@@ -70,23 +70,25 @@ public class DynamicNetworkStrategy implements Strategy {
 		List<String> data = CommonUtils.getInputFile(filepath);
 		for (String item : data) {
 			String[] strs = item.split("	");
+			
 			if (strs.length == 1)
 				continue;
-			String[] items = strs[1].split(",");
-			if (mp.containsKey(strs[0])) {
+			String[] items = strs[2].split(", ");
+			if (mp.containsKey(strs[1])) {
 				for (String ss : items) {
-					mp.get(strs[0]).add(ss);
+					mp.get(strs[1]).add(ss);
 				}
 			} else {
 				List<String> list = new ArrayList<String>();
 				for (String ss : items) {
 					list.add(ss);
 				}
-				mp.put(strs[0], list);
+				mp.put(strs[1], list);
 			}
 
 			for (String ss : items) {
 				if (!xbqMap.containsKey(ss)) {
+					
 					xbqMap.put(ss, null);
 				}
 			}
@@ -121,9 +123,9 @@ public class DynamicNetworkStrategy implements Strategy {
 		boolean flag = true;
 		for (String item : data) {
 			String items[] = item.split("	");
+			
 			list1 = mp.get(items[0]);
 			list2 = mp.get(items[1]);
-			// System.out.println(item);
 			if (list1 != null && list2 != null) {
 				flag = true;
 				for (String ss : list1) {

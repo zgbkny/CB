@@ -1,33 +1,18 @@
 package com.cb;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
+
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import com.cb.service.StatService;
-import com.cb.strategy.Strategy;
-import com.cb.strategy.impl.CentralityStrategy;
-import com.cb.strategy.impl.DCTableStrategy;
+
 import com.cb.strategy.impl.DcStrategy;
 import com.cb.strategy.impl.DynamicNetworkStrategy;
-import com.cb.strategy.impl.EccSumStrategy;
-import com.cb.strategy.impl.EssSetStatStrategy;
-import com.cb.strategy.impl.GenBrokeLineStrategy;
-import com.cb.strategy.impl.GenStatStrategy;
-import com.cb.strategy.impl.GeneExpStrategy;
-import com.cb.strategy.impl.HubEcc;
-import com.cb.strategy.impl.HubUc;
-import com.cb.strategy.impl.StatStrategy;
-import com.cb.utils.CBUtils;
+import com.cb.strategy.impl.PaperFinalStrategy;
 import com.cb.utils.CommonUtils;
-import com.cb.utils.DCUtils;
 import com.cb.utils.EssUtils;
-import com.cb.utils.PCCUtils;
 
 public class cb {
 	public static void find() {
@@ -62,12 +47,87 @@ public class cb {
 		System.out.println("small:" + small);
 	}
 	
+	public static void calEssCount() {
+		List<String> list = CommonUtils.getInputFileJustKey("/home/ww/cache/S-PIN（静态）.txt");
+		int i = 0, count = 0;
+		Set<String> essSet = EssUtils.getEssentialSet();
+		for (String item : list) {
+			if (essSet.contains(item)) {
+				count++;
+			}
+			i++;
+			if (i == 100) {
+				break;
+			}
+		}
+		System.out.println(i);
+		System.out.println(count);
+	}
+	
+	public static void genTable() {
+		String file_s = "/home/ww/cache/cb/20150718/S-PIN（静态）_dc.txt";
+		String file_nf = "/home/ww/cache/cb/20150718/NF-PIN（肖强华）_dc.txt";
+		String file_ts = "/home/ww/cache/cb/20150718/TS-PIN（陈骁培）_dc.txt";
+		List<String> list1 = CommonUtils.getInputFileJustKey(file_s);
+		Map<String, Integer> map_s = CommonUtils.getInputFileMapByInteger(file_s);
+		Map<String, Integer> map_nf = CommonUtils.getInputFileMapByInteger(file_nf);
+		Map<String, Integer> map_ts = CommonUtils.getInputFileMapByInteger(file_ts);
+		Set<String> essSet = EssUtils.getEssentialSet();
+		
+		List<String> list = new ArrayList<String>();
+		
+		for (String item : list1) {
+			list.add(item + "	" + map_s.get(item) + "	" + map_nf.get(item) + "	" + map_ts.get(item) + "	" + essSet.contains(item));
+		}
+		CommonUtils.outputFile("/home/ww/cache/cb/20150718/table.txt", list);
+		
+	}
+	
+	public static void ttt() {
+		List<String> list = CommonUtils.getFilesInSubPath("/home/ww/cache/cb/20150725/subnet");
+		List<String> l = new ArrayList<String>();
+		Set<String> set = new HashSet<String>();
+		int i = 0;
+		for (String filepath : list) {
+			
+			List<String> tmpList = CommonUtils.getInputFile(filepath);
+			i += tmpList.size();
+			for (String item : tmpList) {
+				if (!set.contains(item)) {
+					l.add(item);
+					set.add(item);
+				}
+			}
+		}
+		System.out.println(i);
+		System.out.println("all" + l.size());
+	}
+	
     /**
      * @param args
      */
     public static void main(String[] args) {
-    	DCTableStrategy esst = new DCTableStrategy();
-    	esst.action("/home/ww/cache/cb/20150618/DC");
+    	/* 第一个参数是动态网路目录
+    	 * 第二个参数是细胞器文件
+    	 */
+    	String dirPath = "/home/ww/cache/cb/20150725/12个时刻子网";
+    	String filePath = "/home/ww/cache/cb/20150725/SubcellularLocationOfYeast.txt";
+    	//PaperFinalStrategy pfs = new PaperFinalStrategy(filePath);
+    	//pfs.action(dirPath);
+    	//ttt();
+    	DynamicNetworkStrategy dns = new DynamicNetworkStrategy("/home/ww/cache/cb/20150725/SubcellularLocationOfYeast.txt", false);
+    	dns.action("/home/ww/cache/cb/20150725/12个时刻子网");
+    	
+    	/*
+    	DcStrategy s2 = new DcStrategy(
+                "/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files_dc.txt",
+                DcStrategy.FILES_IN_PATH);
+        //s2.setMergeFileName("/home/ww/cache/cb/20150609/pxq-subnet_out_merge_files.txt");
+        s2.action("/home/ww/cache/cb/20150718");*/
+    	
+    	
+    	//DCTableStrategy esst = new DCTableStrategy();
+    	//esst.action("/home/ww/cache/cb/20150618/DC");
     	
     	//GenStatStrategy gss = new GenStatStrategy();
     	//gss.action("/home/ww/cache/cb/20150614-3/画折刀图需要的文件");
