@@ -52,7 +52,7 @@ public class GraphUtils {
                         BufferedReader readBuf = new BufferedReader(ins);
                         String buf = null;
                         while ((buf = readBuf.readLine()) != null) {
-                                String[] strs = buf.split("	");
+                                String[] strs = buf.split(",");
                                 if (map.get(strs[0]) == null) {
                                         List<String> list = new ArrayList<String>();
                                         list.add(strs[1]);

@@ -371,4 +371,49 @@ public class CommonUtils {
 
         return list;
     }
+
+	public static Map<String, Integer> getIndexIdMap(String filepath,
+			int index) {
+		// TODO Auto-generated method stub
+		Map<String, Integer> mp = new HashMap<String, Integer>();
+
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            int i = 1;
+            while ((buf = readBuf.readLine()) != null) {
+                String []items = buf.split("	");
+                mp.put(items[index], i);
+                i++;
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // System.out.println("get inputFile done....");
+        return mp;
+	}
+	public static Map<String, Double> getKeyValueMap(String filepath) {
+		// TODO Auto-generated method stub
+		Map<String, Double> mp = new HashMap<String, Double>();
+
+        try {
+            FileReader ins = new FileReader(filepath);
+            BufferedReader readBuf = new BufferedReader(ins);
+            String buf = null;
+            int i = 0;
+            while ((buf = readBuf.readLine()) != null) {
+                String []items = buf.split("	");
+                mp.put(items[0], Double.parseDouble(items[1]));
+            }
+
+        } catch (IOException e) {
+            // TODO Auto-generated catch block
+            e.printStackTrace();
+        }
+        // System.out.println("get inputFile done....");
+        return mp;
+	}
 }
