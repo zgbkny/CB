@@ -29,7 +29,6 @@ public class Group {
 			bfs(it.next(), set, map, lists);
 		}
 	}
-	
 	public static List<List<String>> divideGroup(Map<String, List<String>> map) {
 		List<List<String>> ret = new ArrayList<List<String>>();
 		Set<String> set = map.keySet();

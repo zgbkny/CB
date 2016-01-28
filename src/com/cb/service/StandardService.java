@@ -17,13 +17,13 @@ public class StandardService {
 		double MIN = Double.MAX_VALUE;
 		double MAX = Double.MIN_VALUE;
 		for (String item : list) {
-			String items[] = item.split("	");
+			String items[] = item.split("\t");
 			double value = Double.parseDouble(items[1]);
 			if (MIN > value) MIN = value;
 			if (MAX < value) MAX = value;
 		}
 		for (String item : list) {
-			String items[] = item.split("	");
+			String items[] = item.split("\t");
 			double value  = Double.parseDouble(items[1]);
 			value = (value - MIN) * 1.0 / (MAX - MIN);
 			map.put(items[0], value);
@@ -48,7 +48,7 @@ public class StandardService {
 		});
 		
 		for (Map.Entry<String, Double> item : infoIds) {
-			outList.add(item.getKey() + "	" + item.getValue());
+			outList.add(item.getKey() + "\t" + item.getValue());
 		}
 		
 		CommonUtils.outputFile(outfilepath, outList);

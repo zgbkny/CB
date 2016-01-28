@@ -8,11 +8,10 @@ import com.cb.service.PCCService;
 import com.cb.strategy.Strategy;
 import com.cb.utils.CommonUtils;
 
-import org.apache.log4j.Logger;
 
 public class HubStrategy implements Strategy {
 
-	private Logger log = Logger.getLogger(HubStrategy.class);
+	//private Logger log = Logger.getLogger(HubStrategy.class);
 	
 	public HubService hubs = new HubService();
 	public DCService dcs = new DCService();

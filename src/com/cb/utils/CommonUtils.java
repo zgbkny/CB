@@ -71,6 +71,23 @@ public class CommonUtils {
         }
         return outList;
     }
+    public static List<String> getSubDirPathInPath(String path) {
+        File file = new File(path);
+        if (!file.isDirectory())
+            return null;
+        List<String> outList = new ArrayList<String>();
+        File[] t = file.listFiles();
+        //System.out.println(t);
+        for (int i = 0; i < t.length; i++) {
+            if (t[i].isDirectory()) {
+                // if (t[i].getName().length() < 30) {
+                outList.add(t[i].getAbsolutePath());
+                //System.out.println(t[i].getAbsolutePath());
+                // }
+            }
+        }
+        return outList;
+    }
     
     /***
      * get all files path name in the path (one level)
@@ -240,7 +257,6 @@ public class CommonUtils {
 
     public static List<String> getInputFile(String filepath) {
         List<String> list = new ArrayList<String>();
-
         try {
             FileReader ins = new FileReader(filepath);
             BufferedReader readBuf = new BufferedReader(ins);
@@ -265,7 +281,7 @@ public class CommonUtils {
             BufferedReader readBuf = new BufferedReader(ins);
             String buf = null;
             while ((buf = readBuf.readLine()) != null) {
-            	String strs[] = buf.split("  ");
+            	String strs[] = buf.split("\t");
             	if (strs.length > 1) {
             		list.add(strs[0]);
             	}

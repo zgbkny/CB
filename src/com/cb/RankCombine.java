@@ -36,64 +36,43 @@ public class RankCombine {
 		Map<String, Double> f1Map = CommonUtils.getKeyValueMap(filename1);
 		Map<String, Double> f2Map = CommonUtils.getKeyValueMap(filename2);
 		
-		//to1(f1Map);
-		//to1(f2Map);
 		
 		List<String> outList = new ArrayList<String>();
 		int size = f1Map.size();
 		for (String key : f1Map.keySet()) {
 			if (!f2Map.containsKey(key)) continue;
-			double value = f1Map.get(key) * 1.0 * (1 - f1IndexMap.get(key) * 1.0 / size) +
-						   f2Map.get(key) * 1.0 * (f1IndexMap.get(key) * 1.0 / size);
+
+			/*double value = 0;
+			if (f1Map.get(key) * f1IndexMap.get(key) > f2Map.get(key) * f2IndexMap.get(key)) {
+				value = f1Map.get(key) * 1.0 * (f1IndexMap.get(key) * 1.0 / size) +
+						   f2Map.get(key) * 1.0 * (1 - f1IndexMap.get(key) * 1.0 / size);
+			} else {
+				value = f1Map.get(key) * 1.0 * (1 - f2IndexMap.get(key) * 1.0 / size) +
+						   f2Map.get(key) * 1.0 * (f2IndexMap.get(key) * 1.0 / size);
+			}*/
+			double alfa = 0.0;
+			double value = 0;
+			value = (1 - alfa) * f1Map.get(key) + alfa * f2Map.get(key);
+			
+			 
 			outList.add(key + "	" + value);
 		}
 		CommonUtils.outputFile(outFilename, outList);
-		///////////
-		Map<String, Double> map = new HashMap<String, Double>();
-		int k = 0;
-		for (String str :outList) {
-
-			String[] strs = str.split("	");
-			
-			Double d = Double.parseDouble(strs[1]);
-			map.put(strs[0], d);
-		}
-
-		List<Map.Entry<String, Double>> infoIds = new ArrayList<Map.Entry<String, Double>>(
-		        map.entrySet());
-		System.setProperty("java.util.Arrays.useLegacyMergeSort", "true");
-		Collections.sort(infoIds, new Comparator<Map.Entry<String, Double>>() {
-			public int compare(Map.Entry<String, Double> o1,
-			        Map.Entry<String, Double> o2) {
-				return (int) ((o2.getValue() - o1.getValue()) * 100000000);
-				// int flag = o2.getValue().compareTo(o1.getValue());
-
-				/*
-				 * if (o2.getValue() > o1.getValue()) { return 1; } else return
-				 * -1;
-				 */
-				// return (o1.getKey()).toString().compareTo(o2.getKey());
-			}
-		});
-		List<String> outList2 = new ArrayList<String>();
-		for (Map.Entry<String, Double> item : infoIds) {
-			outList2.add(item.getKey() + "	" + item.getValue());
-		}
-		CommonUtils.outputFile(outFilename, outList2);
+		
+		
 	}
 	
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		///String filename1 = args[0];
+		//String filename1 = args[0];
 		//String filename2 = args[1];
 		//String outFilename = args[2];
-		
-		String filename1 = "E:\\金山网盘\\项目\\生物\\别人的实验\\关于LIDC\\S-PIN_LID.txt";
-		String filename2 = "E:\\金山网盘\\项目\\生物\\别人的实验\\关于LIDC\\S-PIN_indegree.txt";
-		String outFilename = "E:\\金山网盘\\项目\\生物\\别人的实验\\关于LIDC\\S-PIN_lid_indegree.txt";
+		String filename1 = "E:\\金山网盘\\#共享#\\生物\\20151216实验\\data\\NC\\TS-PIN_NC.txt";
+		String filename2 = "E:\\金山网盘\\#共享#\\生物\\ion实验\\orthology.txt";
+		String outFilename = "E:\\金山网盘\\#共享#\\生物\\ion实验\\ion.txt";
 		StandardService.process(filename1, filename1);
 		StandardService.process(filename2, filename2);
-		process(filename1, filename2, outFilename);
+		process(filename2, filename1, outFilename);
 		new StatService().statFileByNum(outFilename);
 	}
 

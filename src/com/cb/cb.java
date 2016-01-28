@@ -110,6 +110,7 @@ public class cb {
     	/* 第一个参数是动态网路目录
     	 * 第二个参数是细胞器文件
     	 */
+    	
     	String dirPath = "/home/ww/cache/cb/20150725/12个时刻子网";
     	String filePath = "/home/ww/cache/cb/20150725/SubcellularLocationOfYeast.txt";
     	//PaperFinalStrategy pfs = new PaperFinalStrategy(filePath);
